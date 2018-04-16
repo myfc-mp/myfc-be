@@ -1,66 +1,66 @@
 SET FOREIGN_KEY_CHECKS=0;
 
--- --------------------------------------------
--- Table structure for resold_price
--- --------------------------------------------
-DROP TABLE IF EXISTS `resold_price`;
-CREATE TABLE `resold_price` (
+-- -------------------------------
+-- Table structure for label
+-- -------------------------------
+DROP TABLE IF EXISTS `label`;
+CREATE TABLE `label` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `price_range` varchar(50) NOT NULL COMMENT '总价范围，用作筛选',
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
+  `description` varchar(10) NOT NULL COMMENT '房屋标签',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='二手房总价筛选表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='房屋标签表';
 
-
--- -----------------------------------
--- Table structure for resold_location
--- -----------------------------------
-DROP TABLE IF EXISTS `resold_location`;
-CREATE TABLE `resold_location` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `location` varchar(100) NOT NULL COMMENT '房屋所在行政区域，用作筛选',  
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
-  `delete_time` int(11) DEFAULT NULL,  
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='二手房区域筛选表';
+-- ----------------------------
+-- Records of label
+-- ----------------------------
+INSERT INTO `label` VALUES ('1',  '地铁沿线'  , null, null);
+INSERT INTO `label` VALUES ('2',  '繁华地段'  , null, null);
+INSERT INTO `label` VALUES ('3',  '配套成熟'  , null, null);
+INSERT INTO `label` VALUES ('4',  '交通便利'  , null, null);
+INSERT INTO `label` VALUES ('5',  '医疗发达'  , null, null);
+INSERT INTO `label` VALUES ('6',  '优质学区'  , null, null);
+INSERT INTO `label` VALUES ('7',  '位置安静'  , null, null);
+INSERT INTO `label` VALUES ('8',  '人车分流'  , null, null);
+INSERT INTO `label` VALUES ('9',  '酒店式公寓', null, null);
+INSERT INTO `label` VALUES ('10', '综合体'    , null, null);
+INSERT INTO `label` VALUES ('11', '品牌开发商', null, null);
+INSERT INTO `label` VALUES ('12', '环境优美'  , null, null);
+INSERT INTO `label` VALUES ('13', '江景房'    , null, null);
+INSERT INTO `label` VALUES ('14', '临公园'    , null, null);
+INSERT INTO `label` VALUES ('15', '刚需房'    , null, null);
+INSERT INTO `label` VALUES ('16', '改善房'    , null, null);
+INSERT INTO `label` VALUES ('17', '福利房'    , null, null);
+INSERT INTO `label` VALUES ('18', '南北通透'  , null, null);
+INSERT INTO `label` VALUES ('19', '投资地产'  , null, null);
+INSERT INTO `label` VALUES ('20', '品质小区'  , null, null);
+INSERT INTO `label` VALUES ('21', '素质住户'  , null, null);
+INSERT INTO `label` VALUES ('22', '拎包入住'  , null, null);
+INSERT INTO `label` VALUES ('23', '地下室'    , null, null);
+INSERT INTO `label` VALUES ('24', '大露台'    , null, null);
+INSERT INTO `label` VALUES ('25', '低单价'    , null, null);
+INSERT INTO `label` VALUES ('26', '低总价'    , null, null);
 
 
 -- -------------------------------
--- Table structure for resold_type
+-- Table structure for label_house
 -- -------------------------------
-DROP TABLE IF EXISTS `resold_type`;
-CREATE TABLE `resold_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) NOT NULL COMMENT '房屋户型',
+DROP TABLE IF EXISTS `label_house`;
+CREATE TABLE `label_house` (
+  `label_id` int(11) NOT NULL COMMENT '作为外键与标签信息关联',
   `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='二手房户型筛选表';
-
-
--- -------------------------------
--- Table structure for resold_area
--- -------------------------------
-DROP TABLE IF EXISTS `resold_area`;
-CREATE TABLE `resold_area` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `area` varchar(50) NOT NULL COMMENT '房屋面积',
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
-  `delete_time` int(11) DEFAULT NULL,
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='二手房面积筛选表';
+  PRIMARY KEY (`label_id`,`house_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='标签和房屋对应表';
 
 
 -- --------------------------------
--- Table structure for resold_image
+-- Table structure for image
 -- --------------------------------
-DROP TABLE IF EXISTS `resold_image`;
-CREATE TABLE `resold_image` (
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL COMMENT '房屋图片地址',
   `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
@@ -71,13 +71,13 @@ CREATE TABLE `resold_image` (
 
 
 -- -------------------------------------
--- Table structure for resold_decoration
+-- Table structure for agency
 -- -------------------------------------
-DROP TABLE IF EXISTS `resold_decoration`;
-CREATE TABLE `resold_decoration` (
+DROP TABLE IF EXISTS `agency`;
+CREATE TABLE `agency` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `decoration` varchar(50) NOT NULL COMMENT '房屋装修情况',
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
+  `name` varchar(10) NOT NULL COMMENT '房屋装修情况',
+  `phone` varchar(11) NOT NULL COMMENT '作为外键与房屋信息关联',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -90,141 +90,49 @@ CREATE TABLE `resold_decoration` (
 DROP TABLE IF EXISTS `resold_item`;
 CREATE TABLE `resold_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL COMMENT '楼盘信息',
-  `description` varchar(255) NOT NULL COMMENT '房屋描述',
-  `location` varchar(100) NOT NULL COMMENT '房屋所在行政区域，用作筛选',  
-  `floor` varchar(50) NOT NULL COMMENT '房屋所在楼层，用作筛选', 
+  `name` varchar(30) NOT NULL COMMENT '楼盘信息',
+  `title` varchar(100) NOT NULL COMMENT '房屋描述',
+  `location` varchar(8) NOT NULL COMMENT '房屋所在行政区域，用作筛选',  
+  `floor` varchar(6) NOT NULL COMMENT '房屋所在楼层，用作筛选', 
   `age` int(11) NOT NULL COMMENT '房屋建造时间',
-  `area` varchar(50) NOT NULL COMMENT '房屋面积',
-  `type` varchar(50) NOT NULL COMMENT '房屋户型',
-  `decoration` varchar(50) NOT NULL COMMENT '房屋装修情况',
-  `price` int(11) NOT NULL COMMENT '房屋总价',
+  `area` varchar(10) NOT NULL COMMENT '房屋面积',
+  `price_total` int(11) NOT NULL COMMENT '房屋总价',
+  `price_unit` int(11) NOT NULL COMMENT '房屋单价',
+  `price_range` varchar(16) NOT NULL COMMENT '总价范围',
+  `decoration` varchar(4) NOT NULL COMMENT '房屋装修情况',
+  `category` varchar(6) NOT NULL COMMENT '房屋类型',
+  `type` varchar(10) NOT NULL COMMENT '房屋户型',
+  `agency` varchar(10) NOT NULL COMMENT '代理人信息',
   `gps` int(11) NOT NULL COMMENT '房屋位置',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='二手房信息表';
 
-
--- --------------------------------------------
--- Table structure for rent_rental
--- --------------------------------------------
-DROP TABLE IF EXISTS `rent_rental`;
-CREATE TABLE `rent_rental` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rental_range` varchar(50) NOT NULL COMMENT '租金范围，用作筛选',
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
-  `delete_time` int(11) DEFAULT NULL,
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='租金筛选表';
-
-
--- --------------------------------------------
--- Table structure for rent_orientation
--- --------------------------------------------
-DROP TABLE IF EXISTS `rent_orientation`;
-CREATE TABLE `rent_orientation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orientation` varchar(50) NOT NULL COMMENT '房屋朝向，用作筛选',
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
-  `delete_time` int(11) DEFAULT NULL,
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='朝向筛选表';
-
-
--- -----------------------------------
--- Table structure for rent_location
--- -----------------------------------
-DROP TABLE IF EXISTS `rent_location`;
-CREATE TABLE `rent_location` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `location` varchar(100) NOT NULL COMMENT '房屋所在行政区域，用作筛选',  
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
-  `delete_time` int(11) DEFAULT NULL,  
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='租房区域筛选表';
-
-
 -- -------------------------------
--- Table structure for rent_type
+-- Table structure for resold_item
 -- -------------------------------
-DROP TABLE IF EXISTS `rent_type`;
-CREATE TABLE `rent_type` (
+DROP TABLE IF EXISTS `resold_item`;
+CREATE TABLE `resold_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) NOT NULL COMMENT '房屋户型',
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
-  `delete_time` int(11) DEFAULT NULL,
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='租房户型筛选表';
-
-
--- -------------------------------
--- Table structure for rent_area
--- -------------------------------
-DROP TABLE IF EXISTS `rent_area`;
-CREATE TABLE `rent_area` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `area` varchar(50) NOT NULL COMMENT '房屋面积',
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
-  `delete_time` int(11) DEFAULT NULL,
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='租房面积筛选表';
-
-
--- --------------------------------
--- Table structure for rent_image
--- --------------------------------
-DROP TABLE IF EXISTS `rent_image`;
-CREATE TABLE `resold_image` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) NOT NULL COMMENT '房屋图片地址',
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
-  `delete_time` int(11) DEFAULT NULL,
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
-
--- -------------------------------------
--- Table structure for rent_decoration
--- -------------------------------------
-DROP TABLE IF EXISTS `rent_decoration`;
-CREATE TABLE `rent_decoration` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `decoration` varchar(50) NOT NULL COMMENT '房屋装修情况',
-  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
-  `delete_time` int(11) DEFAULT NULL,
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
-
--- -------------------------------
--- Table structure for rent_item
--- -------------------------------
-DROP TABLE IF EXISTS `rent_item`;
-CREATE TABLE `rent_item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL COMMENT '楼盘信息',
-  `orientation` varchar(50) NOT NULL COMMENT '房屋朝向，用作筛选',
-  `description` varchar(255) NOT NULL COMMENT '房屋描述',
-  `location` varchar(100) NOT NULL COMMENT '房屋所在行政区域，用作筛选',  
-  `floor` varchar(50) NOT NULL COMMENT '房屋所在楼层，用作筛选', 
-  `age` int(11) NOT NULL COMMENT '房屋建造时间',
-  `area` varchar(50) NOT NULL COMMENT '房屋面积',
-  `type` varchar(50) NOT NULL COMMENT '房屋户型',
-  `decoration` varchar(50) NOT NULL COMMENT '房屋装修情况',
-  `price` int(11) NOT NULL COMMENT '房屋总价',
+  `name` varchar(30) NOT NULL COMMENT '楼盘信息',
+  `title` varchar(100) NOT NULL COMMENT '房屋描述',
+  `location` varchar(8) NOT NULL COMMENT '房屋所在行政区域，用作筛选',  
+  `floor` varchar(6) NOT NULL COMMENT '房屋所在楼层，用作筛选', 
+  `mode` varchar(4) NOT NULL COMMENT '租房模式',
+  `area` varchar(10) NOT NULL COMMENT '房屋面积',
+  `orientation` varchar(4) NOT NULL COMMENT '房屋朝向',
+  `rental` int(11) NOT NULL COMMENT '月租金',
+  `rental_range` varchar(16) NOT NULL COMMENT '租金范围',
+  `decoration` varchar(4) NOT NULL COMMENT '房屋装修情况',
+  `category` varchar(6) NOT NULL COMMENT '房屋类型',
+  `type` varchar(10) NOT NULL COMMENT '房屋户型',
+  `agency` varchar(10) NOT NULL COMMENT '代理人信息',
   `gps` int(11) NOT NULL COMMENT '房屋位置',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='二手房信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=100001 DEFAULT CHARSET=utf8mb4 COMMENT='租房信息表';
 
 
 -- ----------------------------
@@ -246,48 +154,7 @@ CREATE TABLE `third_app` (
 -- ----------------------------
 -- Records of third_app
 -- ----------------------------
-INSERT INTO `third_app` VALUES ('1', 'starcraft', '777*777', 'CMS', '32', 'Super', null, null);
+INSERT INTO `third_app` VALUES ('1', 'admin', '777*777', 'CMS', '32', 'Super', null, null);
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `openid` varchar(50) NOT NULL,
-  `nickname` varchar(50) DEFAULT NULL,
-  `extend` varchar(255) DEFAULT NULL,
-  `delete_time` int(11) DEFAULT NULL,
-  `create_time` int(11) DEFAULT NULL COMMENT '注册时间',
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `openid` (`openid`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4;
 
--- ----------------------------
--- Records of user
--- ----------------------------
-
--- ----------------------------
--- Table structure for user_address
--- ----------------------------
-DROP TABLE IF EXISTS `user_address`;
-CREATE TABLE `user_address` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL COMMENT '收获人姓名',
-  `mobile` varchar(20) NOT NULL COMMENT '手机号',
-  `province` varchar(20) DEFAULT NULL COMMENT '省',
-  `city` varchar(20) DEFAULT NULL COMMENT '市',
-  `country` varchar(20) DEFAULT NULL COMMENT '区',
-  `detail` varchar(100) DEFAULT NULL COMMENT '详细地址',
-  `delete_time` int(11) DEFAULT NULL,
-  `user_id` int(11) NOT NULL COMMENT '外键',
-  `update_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Records of user_address
--- ----------------------------
 SET FOREIGN_KEY_CHECKS=1;
