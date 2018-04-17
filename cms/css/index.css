@@ -1,6 +1,7 @@
+
 .header{
     background-color: rgba(255, 209, 29, 1);
-    height:180px;
+    height:6rem;
     margin: 10px 20px;
     border-radius: 5px;
 }
@@ -10,13 +11,14 @@
 }
 
 .title{
-    font-size: 120px;
+    font-size: 3rem;
     letter-spacing: 20px;
     text-align: center;
+    line-height: 6rem;
 }
 
 .subtitle{
-    font-size: 40px;
+    font-size: 1.6rem;
 }
 
 .main_frame{
@@ -33,7 +35,7 @@
 }
 
 .nav-bar{
-    font-size: 50px;
+    font-size: 1.6rem;
     text-align: center;
     margin-bottom: 5px;
     border-radius: 5px;
@@ -53,5 +55,5 @@
     border-radius: 5px;
     text-align: center;
     line-height: 50px;
-    font-size: 40px;
+    font-size: 1.4rem;
 }
