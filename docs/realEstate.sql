@@ -110,10 +110,10 @@ CREATE TABLE `resold_item` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='二手房信息表';
 
 -- -------------------------------
--- Table structure for resold_item
+-- Table structure for rent_item
 -- -------------------------------
-DROP TABLE IF EXISTS `resold_item`;
-CREATE TABLE `resold_item` (
+DROP TABLE IF EXISTS `rent_item`;
+CREATE TABLE `rent_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL COMMENT '楼盘信息',
   `title` varchar(100) NOT NULL COMMENT '房屋描述',

@@ -1,10 +1,5 @@
-{include file="public/head,public/top"}
+{extend name="public/base"}
 
-            <div id='col-10'>
-                <iframe id="content" scrolling="yes" frameborder="0" src={:url('index/welcome')}></iframe>
-            </div>
-        </div>
-    </div>
-</body>
-
-</html>
+{block name="frame"}
+这里是首页页面
+{/block}
