@@ -14,7 +14,10 @@ Route::get('think', function () {
 });
 //新增二手出售房源
 Route::get('index/addresold', 'index/Add/resold');
-
+//修改经纪人信息
+Route::get('index/modifyAgency', 'index/Stuff/modifyAgency');
+//增加经纪人信息
+Route::get('index/addAgency', 'index/Stuff/addAgency');
 return [
 
 ];
