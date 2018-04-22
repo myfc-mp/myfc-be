@@ -14,7 +14,7 @@ use think\Controller;
 class Add extends Controller
 {
     public function resold(){
-        return $this->fetch();
-    }
 
+        return "hahaha";
+    }
 }

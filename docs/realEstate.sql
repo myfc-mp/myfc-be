@@ -62,7 +62,7 @@ CREATE TABLE `label_house` (
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(255) NOT NULL COMMENT '房屋图片地址',
+  `url` varchar(50) NOT NULL COMMENT '房屋图片地址',
   `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
@@ -70,14 +70,27 @@ CREATE TABLE `image` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 
+-- --------------------------------
+-- Table structure for avatar
+-- --------------------------------
+DROP TABLE IF EXISTS `avatar`;
+CREATE TABLE `avatar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(50) NOT NULL COMMENT '头像图片地址',
+  `agency_id` int(11) NOT NULL COMMENT '作为外键与经济人信息关联',
+  `delete_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
 -- -------------------------------------
 -- Table structure for agency
 -- -------------------------------------
 DROP TABLE IF EXISTS `agency`;
 CREATE TABLE `agency` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(10) NOT NULL COMMENT '房屋装修情况',
-  `phone` varchar(11) NOT NULL COMMENT '作为外键与房屋信息关联',
+  `name` varchar(10) NOT NULL COMMENT '经纪人姓名',
+  `phone` varchar(11) NOT NULL COMMENT '经纪人电话',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
