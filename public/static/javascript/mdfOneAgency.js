@@ -75,15 +75,14 @@ $('#modify').click(function () {
         'name':'id',
         'value':$('#user-photo').attr('data-id')
     });
-    console.log(upData);
+    $(this).attr('disabled','disabled');
     $.ajax({
         url: "?s=/index/stuff/modifyInfo",
         type: 'post',
         data: upData,
         dataType: 'json',
         success: function (data) {
-            // window.location.href="?s=/index/stuff/modifyAgency";
-            console.log(data.status);
+            window.location.href="?s=/index/stuff/modifyAgency";
         }
     });
 });

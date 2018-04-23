@@ -70,7 +70,7 @@ $('#register').click(function () {
         'name':'avatar',
         'value':lCropperInstance
     });
-
+    $(this).attr('disabled','disabled');
     $.ajax({
         url: "?s=/index/stuff/uploadInfo",
         type: 'post',
