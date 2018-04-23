@@ -1,8 +1,8 @@
 document.write("<script language=javascript src='https://cdn.bootcss.com/cropper/3.1.3/cropper.min.js'></script>");
 let lCropperInstance =null;
-let nameInput = false;
-let mobileInput = false;
-let avatarInput = false;
+let nameInput = true;
+let mobileInput = true;
+
 var initCropperInModal = function(img, input){
     var $image = img;
     var $inputImage = input;
@@ -24,6 +24,7 @@ var initCropperInModal = function(img, input){
             if (!$image.data('cropper')) {
                 return;
             }
+
             if (files && files.length) {
                 file = files[0];
                 if (/^image\/\w+$/.test(file.type)) {
@@ -64,20 +65,25 @@ $('#confirm').click(function () {
     }
 });
 
-$('#register').click(function () {
+$('#modify').click(function () {
     var upData = $('#AgencyForm').serializeArray();
     upData.push({
         'name':'avatar',
         'value':lCropperInstance
     });
-
+    upData.push({
+        'name':'id',
+        'value':$('#user-photo').attr('data-id')
+    });
+    console.log(upData);
     $.ajax({
-        url: "?s=/index/stuff/uploadInfo",
+        url: "?s=/index/stuff/modifyInfo",
         type: 'post',
         data: upData,
         dataType: 'json',
         success: function (data) {
-            window.location.href="?s=/index/stuff/addAgencyResult/status/"+data.status;
+            // window.location.href="?s=/index/stuff/modifyAgency";
+            console.log(data.status);
         }
     });
 });
@@ -95,7 +101,10 @@ $('#agencyMobile').blur(function () {
         mobileInput = false;
     }
     if(checkInput()){
-        $('#register').removeClass('btn-secondary').addClass('btn-primary').removeAttr('disabled');
+        $('#modify').removeClass('btn-secondary').addClass('btn-primary').removeAttr('disabled');
+    }
+    else{
+        $('#modify').removeClass('btn-primary').addClass('btn-secondary').attr('disabled','disabled');
     }
 });
 
@@ -112,10 +121,13 @@ $('#agencyName').blur(function () {
         nameInput = false;
     }
     if(checkInput()){
-        $('#register').removeClass('btn-secondary').addClass('btn-primary').removeAttr('disabled');
+        $('#modify').removeClass('btn-secondary').addClass('btn-primary').removeAttr('disabled');
+    }
+    else{
+        $('#modify').removeClass('btn-primary').addClass('btn-secondary').attr('disabled','disabled');
     }
 });
 
 var checkInput = function() {
-    return nameInput && mobileInput && avatarInput;
+    return nameInput && mobileInput;
 };

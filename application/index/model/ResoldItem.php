@@ -9,9 +9,8 @@
 namespace app\index\model;
 
 
-use think\Model;
 
-class ResoldItem extends Model
+class ResoldItem extends BaseModel
 {
 
 }

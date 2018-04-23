@@ -1,0 +1,8 @@
+@import url(bootstrap-table.min.css);
+table{
+    width:100%;
+}
+td img{
+    max-width: 36px;
+    max-height: 36px;
+}

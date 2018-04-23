@@ -1,34 +1,44 @@
 {extend name="public/base"}
 
 {block name="frame"}
-<table class="table table-dark">
-    <thead>
+<div class="col-sm-12 text-center">
+<table data-toggle="table" data-pagination="true" class="table table-bordered">
+    <thead class="thead-light">
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">ID</th>
+        <th scope="col">头像</th>
+        <th scope="col">姓名</th>
+        <th scope="col">操作</th>
     </tr>
     </thead>
     <tbody>
+    {foreach $list as $key=>$vo }
     <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <td>{$vo.id}</td>
+        <td><img src="{$vo.avatar.url}"></td>
+        <td>{$vo.name}</td>
+        <td>
+            <button data-id="{$vo.id}" data-toggle="" class="btn btn-warning btn-sm modifyInfo">修改</button>
+            <button data-id="{$vo.id}" data-name="{$vo.name}" class="btn btn-danger btn-sm deleteInfo">删除</button>
+        </td>
     </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-    </tr>
+    {/foreach}
     </tbody>
 </table>
+    <div class="modal fade" id="deleteConfirm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    是否确认删除&nbsp<span id="deleteName" class="text-danger"></span>&nbsp?
+                </div>
+                <hr>
+                <div class="mb-2 row justify-content-around">
+                    <button id="sureDelete" type="button" class="btn btn-danger" data-dismiss="modal">删除</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 {/block}
