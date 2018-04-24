@@ -1,0 +1,105 @@
+{extend name="public/base"}
+
+{block name="frame"}
+<div class="col-sm-6 px-0">
+    <form class="form-horizontal" id="soldForm">
+        <div class="form-group row">
+            <label for="houseName" class="col-4 col-form-label">楼盘名称</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="name" id="houseName" placeholder="请输入楼盘名称">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseLocation" class="col-4 col-form-label">行政区域</label>
+            <div class="col-8">
+                <select class="form-control" name="Location" id="houseLocation" >
+                    <option>锦江区</option>
+                    <option>青羊区</option>
+                    <option>武侯区</option>
+                    <option>高新南区</option>
+                    <option>高新西区</option>
+                    <option>成华区</option>
+                    <option>金牛区</option>
+                    <option>郫都区</option>
+                    <option>天府新区</option>
+                    <option>双流</option>
+                    <option>温江</option>
+                    <option>龙泉驿</option>
+                    <option>新都</option>
+                    <option>青白江</option>
+                    <option>金堂</option>
+                    <option>大邑</option>
+                    <option>浦江</option>
+                    <option>新津</option>
+                    <option>彭州</option>
+                    <option>邛崃</option>
+                    <option>崇州</option>
+                    <option>都江堰</option>
+                    <option>简阳</option>
+                    <option>仁寿</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="houseFloor" class="col-4 col-form-label">楼层</label>
+            <div class="col-8">
+                <select class="form-control" name="floor" id="houseFloor" >
+                    <option>低楼层</option>
+                    <option>中楼层</option>
+                    <option>高楼层</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="houseAge" class="col-4 col-form-label">楼盘名称</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="age" id="houseAge" placeholder="请输入建造年份">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseArea" class="col-4 col-form-label">房屋面积</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="area" id="houseArea" placeholder="请输入建筑面积">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="houseTotal" class="col-4 col-form-label">房屋总价</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="total" id="houseTotal" placeholder="请输入总价">
+            </div>
+        </div>
+
+        <div class="form-group row " >
+            <label for="user-photo" class="col-4 col-form-label">经纪人头像</label>
+            <div class="col-4 h-100">
+                <div class="form-control m-0 p-0">
+                    <img id="user-photo" class="h-100 w-100 m-0" src="__STATIC__/placeholder.png" >
+                </div>
+            </div>
+
+            <div class="col-4 text-right">
+                <label for="photoInput" class="btn btn-danger">
+                    <input type="file" class="sr-only" id="photoInput" accept="image/*">
+                    <span>选择图片</span>
+                </label>
+                <div class="w-100 py-1"></div>
+                <div id="confirm" class="btn btn-info" style="text-align: right" >确认图片</div>
+            </div>
+        </div>
+    </form>
+    <div class="w-100 py-2"></div>
+
+    <div class="col-sm-12">
+        <button id="register" class="btn btn-secondary w-100" disabled>注册</button>
+    </div>
+
+</div>
+<div class="col-sm-6">
+    <div id="img-container" class="cropper-container sr-only">
+        <img src="" alt="" id="photo">
+    </div>
+</div>
+{/block}

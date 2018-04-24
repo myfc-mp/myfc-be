@@ -1,4 +1,13 @@
-@import url(cropper.min.css);
+@import url(cropper.css);
 
+.img-container {
+    margin-bottom: 1rem;
+    max-height: 497px;
+    min-height: 200px;
+}
 
-
+@media (min-width: 768px) {
+    .img-container {
+        min-height: 497px;
+    }
+}
