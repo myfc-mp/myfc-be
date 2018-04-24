@@ -1,69 +1,153 @@
-document.write("<script language=javascript src='https://cdn.bootcss.com/cropper/3.1.3/cropper.min.js'></script>");
-let lCropperInstance =null;
-let nameInput = true;
-let mobileInput = true;
 
-var initCropperInModal = function(img, input){
-    var $image = img;
-    var $inputImage = input;
+var lCropperInstance =null;
+var nameInput = true;
+var mobileInput = true;
+
+window.onload = function () {
+
+    'use strict';
+
+    var Cropper = window.Cropper;
+    var URL = window.URL || window.webkitURL;
+    var container = document.querySelector('.img-container');
+    var image = container.getElementsByTagName('img').item(0);
+    // var download = document.getElementById('download');
+    var actions = document.getElementById('actions');
+
     var options = {
-        aspectRatio: 1, // 纵横比
-        viewMode: 1,
+        //修改点：修改比例为1
+        aspectRatio: 1,
+    };
+    var cropper = new Cropper(image, options);
+    var uploadedImageType = 'image/jpeg';
+    var uploadedImageName = 'cropped.jpg';
+    var uploadedImageURL;
+
+    // Buttons
+    if (!document.createElement('canvas').getContext) {
+        $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
+    }
+
+    if (typeof document.createElement('cropper').style.transition === 'undefined') {
+        $('button[data-method="rotate"]').prop('disabled', true);
+        $('button[data-method="scale"]').prop('disabled', true);
+    }
+
+    // Download
+    // if (typeof download.download === 'undefined') {
+    //   download.className += ' disabled';
+    // }
+
+    // Methods
+    actions.querySelector('.docs-buttons').onclick = function (event) {
+        var e = event || window.event;
+        var target = e.target || e.srcElement;
+
+        var result;
+        var input;
+        var data;
+
+        if (!cropper) {
+            return;
+        }
+
+    
+        // while (target !== this) {
+        //     if (target.getAttribute('data-method')) {
+        //         break;
+        //     }
+        //
+        //     target = target.parentNode;
+        // }
+
+        // if (target === this || target.disabled || target.className.indexOf('disabled') > -1) {
+        //     return;
+        // }
+
+        data = {
+            method: target.getAttribute('data-method'),
+            target: target.getAttribute('data-target'),
+            option: target.getAttribute('data-option') || undefined,
+            secondOption: target.getAttribute('data-second-option') || undefined
+        };
+  
+        if (data.method) {
+
+            try {
+                data.option = JSON.parse(data.option);
+            } catch (e) {
+                console.log(e.message);
+            }
+
+            if (uploadedImageType === 'image/jpeg') {
+                if (!data.option) {
+                    data.option = {};
+                }
+                data.option.fillColor = '#fff';
+            }
+
+            result = cropper[data.method](data.option, data.secondOption);
+   
+            if (result) {
+                // Bootstrap's Modal
+          
+                $('.img-container').addClass('sr-only');
+                lCropperInstance = result.toDataURL("image/png");
+                $('#img-output img').attr('src',lCropperInstance);
+                avatarInput = true;
+        
+                // if (!download.disabled) {
+                //   download.download = uploadedImageName;
+                //   download.href = result.toDataURL(uploadedImageType);
+                // }
+                
+            }
+
+            if (typeof result === 'object' && result !== cropper && input) {
+                try {
+                    input.value = JSON.stringify(result);
+                } catch (e) {
+                    console.log(e.message);
+                }
+            }
+        }
     };
 
-    var URL = window.URL || window.webkitURL;
-    var blobURL;
-    $image.cropper(options);
+    // inputImage是图片选择input的ID
+    var inputImage = document.getElementById('inputImage');
 
     if (URL) {
-
-        $inputImage.change(function() {
+        inputImage.onchange = function () {
             var files = this.files;
             var file;
 
-            if (!$image.data('cropper')) {
-                return;
-            }
-
-            if (files && files.length) {
+            if (cropper && files && files.length) {
                 file = files[0];
-                if (/^image\/\w+$/.test(file.type)) {
 
-                    if(blobURL) {
-                        URL.revokeObjectURL(blobURL);
+                if (/^image\/\w+/.test(file.type)) {
+                    uploadedImageType = file.type;
+                    uploadedImageName = file.name;
+
+                    if (uploadedImageURL) {
+                        URL.revokeObjectURL(uploadedImageURL);
                     }
-                    blobURL = URL.createObjectURL(file);
-                    // 重置cropper，将图像替换
-                    $image.cropper('reset').cropper('replace', blobURL);
-                    // 选择文件后，显示和隐藏相关内容
-                    $('#img-container').removeClass('sr-only');
+
+                    image.src = uploadedImageURL = URL.createObjectURL(file);
+                    cropper.destroy();
+                    cropper = new Cropper(image, options);
+                    inputImage.value = null;
+                    $('.img-container').removeClass('sr-only');     
+                               
                 } else {
-                    window.alert('请选择一个图像文件！');
+                    window.alert('Please choose an image file.');
                 }
             }
-        });
+        };
     } else {
-        $inputImage.prop('disabled', true).addClass('disabled');
+        inputImage.disabled = true;
+        inputImage.parentNode.className += ' disabled';
     }
 };
-
-$(function(){
-    initCropperInModal($('#photo'),$('#photoInput'));
-});
-
-$('#confirm').click(function () {
-    lCropperInstance = $('#photo').cropper('getCroppedCanvas',{
-        width:320,
-        height:320
-    }).toDataURL('image/jpg');
-
-    $('#user-photo').attr('src',lCropperInstance).attr('style','display:block');
-    $('#img-container').addClass('sr-only');
-    avatarInput = true;
-    if(checkInput()){
-        $('#register').removeClass('btn-secondary').addClass('btn-primary').removeAttr('disabled');
-    }
-});
 
 $('#modify').click(function () {
     var upData = $('#AgencyForm').serializeArray();
@@ -73,8 +157,9 @@ $('#modify').click(function () {
     });
     upData.push({
         'name':'id',
-        'value':$('#user-photo').attr('data-id')
+        'value':$('#agencyName').attr('data-id')
     });
+   
     $(this).attr('disabled','disabled');
     $.ajax({
         url: "?s=/index/stuff/modifyInfo",
@@ -82,7 +167,9 @@ $('#modify').click(function () {
         data: upData,
         dataType: 'json',
         success: function (data) {
+            
             window.location.href="?s=/index/stuff/modifyAgency";
+
         }
     });
 });

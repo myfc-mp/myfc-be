@@ -1,4 +1,8 @@
-
+body  {  
+        -webkit-text-size-adjust: 100% !important;  
+        text-size-adjust: 100% !important;  
+        -moz-text-size-adjust: 100% !important;  
+    } 
 #banner{
     background-color: rgba(255, 209, 29, 1);
 }
