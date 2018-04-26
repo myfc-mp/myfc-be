@@ -371,7 +371,7 @@
   }
 
   /**
-   * Add classes to the given element.
+   * AddHouse classes to the given element.
    * @param {Element} element - The target element.
    * @param {string} value - The classes to be added.
    */
@@ -429,10 +429,10 @@
   }
 
   /**
-   * Add or remove classes from the given element.
+   * AddHouse or remove classes from the given element.
    * @param {Element} element - The target element.
    * @param {string} value - The classes to be toggled.
-   * @param {boolean} added - Add only.
+   * @param {boolean} added - AddHouse only.
    */
   function toggleClass(element, value, added) {
     if (!value) {
@@ -588,7 +588,7 @@
   }
 
   /**
-   * Add event listener to the target element.
+   * AddHouse event listener to the target element.
    * @param {Element} element - The event target.
    * @param {string} type - The event type(s).
    * @param {Function} listener - The event listener.
@@ -686,7 +686,7 @@
   }
 
   /**
-   * Add timestamp to the given URL.
+   * AddHouse timestamp to the given URL.
    * @param {string} url - The target URL.
    * @returns {string} The result URL.
    */
@@ -1628,8 +1628,8 @@
 
         /**
          * Override img element styles
-         * Add `display:block` to avoid margin top issue
-         * Add `height:auto` to override `height` attribute on IE8
+         * AddHouse `display:block` to avoid margin top issue
+         * AddHouse `height:auto` to override `height` attribute on IE8
          * (Occur only when margin-top <= -height)
          */
         img.style.cssText = 'display:block;' + 'width:100%;' + 'height:auto;' + 'min-width:0!important;' + 'min-height:0!important;' + 'max-width:none!important;' + 'max-height:none!important;' + 'image-orientation:0deg!important;"';

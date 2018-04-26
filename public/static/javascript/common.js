@@ -1,7 +1,16 @@
 $(document).ready(function(){
     //页面跳转事件
     $("#addResold").click(function(){
-        window.location.href="?s=/index/Add/resold";
+        window.location.href="?s=/index/Add_house/addResold";
+    });
+    $("#addrent").click(function(){
+        window.location.href="?s=/index/Add_house/addRent";
+    });
+    $("#mngResold").click(function(){
+        window.location.href="?s=/index/Manage_house/mngResold";
+    });
+    $("#mngrent").click(function(){
+        window.location.href="?s=/index/Manage_house/mngRent";
     });
 
     $("#mdfStuff").click(function(){

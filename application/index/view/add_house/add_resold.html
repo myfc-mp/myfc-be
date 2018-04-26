@@ -1,0 +1,222 @@
+{extend name="public/base"}
+
+{block name="frame"}
+<!--<form class="form-horizontal" id="soldForm">-->
+    <div class="col-sm-6 px-1">
+        <div class="form-group row">
+            <label for="houseName" class="col-4 col-form-label">楼盘名称</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="name" id="houseName" placeholder="请输入楼盘名称">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseLocation" class="col-4 col-form-label">行政区域</label>
+            <div class="col-8">
+                <select class="form-control" name="Location" id="houseLocation" >
+                    <option>锦江区</option>
+                    <option>青羊区</option>
+                    <option>武侯区</option>
+                    <option>高新南区</option>
+                    <option>高新西区</option>
+                    <option>成华区</option>
+                    <option>金牛区</option>
+                    <option>郫都区</option>
+                    <option>天府新区</option>
+                    <option>双流</option>
+                    <option>温江</option>
+                    <option>龙泉驿</option>
+                    <option>新都</option>
+                    <option>青白江</option>
+                    <option>金堂</option>
+                    <option>大邑</option>
+                    <option>浦江</option>
+                    <option>新津</option>
+                    <option>彭州</option>
+                    <option>邛崃</option>
+                    <option>崇州</option>
+                    <option>都江堰</option>
+                    <option>简阳</option>
+                    <option>仁寿</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="houseFloor" class="col-4 col-form-label">楼层</label>
+            <div class="col-8">
+                <select class="form-control" name="floor" id="houseFloor" >
+                    <option>低楼层</option>
+                    <option>中楼层</option>
+                    <option>高楼层</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="houseAge" class="col-4 col-form-label">房屋年代</label>
+            <div class="col-8">
+                <div class="input-group mb-0">
+                    <input type="text" class="form-control" name="age" id="houseAge" placeholder="请输入建造年份">
+                    <div class="input-group-append">
+                        <span class="input-group-text">年</span>
+                    </div>
+                </div>
+                <div class="text-danger sr-only small" id="ageInfoErr">
+                    请输入正确年份
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseArea" class="col-4 col-form-label">房屋面积</label>
+            <div class="col-8">
+                <div class="input-group mb-0">
+                    <input type="text" class="form-control" name="area" id="houseArea" placeholder="请输入建筑面积">
+                    <div class="input-group-append">
+                        <span class="input-group-text">m<sup>2</sup></span>
+                    </div>
+                </div>
+                <div class="text-danger sr-only small" id="areaInfoErr">
+                    请输入正确面积
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-6 px-1">
+        <div class="form-group row">
+            <label for="houseDecoration" class="col-4 col-form-label">房屋装修</label>
+            <div class="col-8">
+                <select class="form-control" name="Decoration" id="houseDecoration" >
+                    <option>清水</option>
+                    <option>精装</option>
+                    <option>豪装</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="houseCategory" class="col-4 col-form-label">房屋类型</label>
+            <div class="col-8">
+                <select class="form-control" name="Category" id="houseCategory" >
+                    <option>别墅</option>
+                    <option>住宅</option>
+                    <option>公寓</option>
+                    <option>写字楼</option>
+                    <option>商铺</option>
+                    <option>其他</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseType" class="col-4 col-form-label">房屋户型</label>
+            <div class="col-8">
+                <select class="form-control" name="Type" id="houseType" >
+                    <option>一室</option>
+                    <option>二室</option>
+                    <option>三室</option>
+                    <option>四室</option>
+                    <option>五室及以上</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseAgency" class="col-4 col-form-label">代理人信息</label>
+            <div class="col-4">
+                <input type="text" class="form-control" name="Agency" id="houseAgency" placeholder="请选择">
+            </div>
+            <div class="col-3 btn btn-info">
+                点击选择
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseTotal" class="col-4 col-form-label">房屋总价</label>
+            <div class="col-8">
+                <div class="input-group mb-0">
+                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="total" id="houseTotal" placeholder="请输入总价">
+                    <div class="input-group-append">
+                        <span class="input-group-text">万</span>
+                    </div>
+                </div>
+                <div class="text-danger sr-only small" id="priceInfoErr">
+                    请输入正确价格
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-sm-6 px-1">
+        <div class="form-group">
+            <label for="houseTitle">房源标题(不超过25字)</label>
+            <textarea class="form-control" name="Title" id="houseTitle" rows="2"></textarea>
+            <div class="text-danger sr-only small" id="titleInfoErr">
+        </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-4 col-form-label">详细信息</label>
+            <div class="col-7 btn btn-info">
+                点击弹出框编辑
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-4 col-form-label">房屋图片</label>
+
+            <label for="inputImage" class="col-7 btn btn-info" id="inputLabel">
+                <input type="file" class="sr-only" id="inputImage" accept="image/*">
+                <span>点击选择图片(最多9张)</span>
+            </label>
+        </div>
+        <div id="picGroup1" class="form-group row sr-only" style="height: 100px;">
+            <div class="col-4 h-100" id="img-output1">
+                <img class="h-100 w-100 m-0 sr-only" src="" >
+            </div>
+            <div class="col-4 h-100" id="img-output2">
+                <img class="h-100 w-100 m-0 sr-only" src="" >
+            </div>
+            <div class="col-4 h-100" id="img-output3">
+                <img class="h-100 w-100 m-0 sr-only" src="" >
+            </div>
+        </div>
+        <div id="picGroup2" class="form-group row sr-only" style="height: 100px;">
+            <div class="col-4 h-100" id="img-output4">
+                <img class="h-100 w-100 m-0 sr-only" src="" >
+            </div>
+            <div class="col-4 h-100" id="img-output5">
+                <img class="h-100 w-100 m-0 sr-only" src="" >
+            </div>
+            <div class="col-4 h-100" id="img-output6">
+                <img class="h-100 w-100 m-0 sr-only" src="" >
+            </div>
+        </div>
+        <div id="picGroup3" class="form-group row sr-only" style="height: 100px;">
+            <div class="col-4 h-100" id="img-output7">
+                <img class="h-100 w-100 m-0 sr-only" src="" >
+            </div>
+            <div class="col-4 h-100" id="img-output8">
+                <img class="h-100 w-100 m-0 sr-only" src="" >
+            </div>
+            <div class="col-4 h-100" id="img-output9">
+                <img class="h-100 w-100 m-0 sr-only" src="" >
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 px-1">
+        <div class="mb-2">请设定房屋位置(点击地图设置标记)</div>
+        <div id="container"></div>
+
+    </div>
+<!--</form>-->
+    <div class="w-100 py-2"></div>
+
+    <div class="col-sm-12">
+        <button id="addItem" class="btn btn-primary w-100">确定增加房屋</button>
+        <div class="text-danger sr-only small" id="submitInfoErr">
+            信息填写不完整或有错误，请检查
+        </div>
+    </div>
+
+    <div class="img-container sr-only">
+        <img src="" alt="Picture">
+    </div>
+</div>
+
+{/block}
