@@ -73,7 +73,8 @@ window.onload = function () {
 
             if (result) {
                 $('.img-container').addClass('sr-only');
-                lCropperInstance = result.toDataURL("image/png");
+                var roundResult = getRoundedCanvas(result);
+                lCropperInstance = roundResult.toDataURL("image/png");
                 $('#img-output img').attr('src',lCropperInstance);
                 avatarInput = true;    
                 if(checkInput()){
@@ -126,6 +127,24 @@ window.onload = function () {
         inputImage.parentNode.className += ' disabled';
     }
 };
+
+function getRoundedCanvas(sourceCanvas) {
+  var canvas = document.createElement('canvas');
+  var context = canvas.getContext('2d');
+  var width = sourceCanvas.width;
+  var height = sourceCanvas.height;
+  height=width;
+  canvas.width = width;
+  canvas.height = height;
+  context.beginPath();
+  //这里是控制裁剪区域的大小（这里也决定你所要生成的图片的大小和形状 我这边用的是圆形的头像 大家有别的需要可以修改）
+  context.arc(width/2, height/2, Math.min(width, height)/2, 0, 2 * Math.PI);
+  context.strokeStyle = 'rgba(0,0,0,0)';
+  context.stroke();
+  context.clip();
+  context.drawImage(sourceCanvas, 0, 0, width, height);
+  return canvas;
+ }
 
 $('#register').click(function () {
     var upData = $('#AgencyForm').serializeArray();
