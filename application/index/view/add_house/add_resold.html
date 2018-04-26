@@ -1,8 +1,9 @@
 {extend name="public/base"}
 
 {block name="frame"}
-<!--<form class="form-horizontal" id="soldForm">-->
+
     <div class="col-sm-6 px-1">
+    <form class="form-horizontal" id="soldForm1">
         <div class="form-group row">
             <label for="houseName" class="col-4 col-form-label">楼盘名称</label>
             <div class="col-8">
@@ -81,8 +82,10 @@
             </div>
 
         </div>
+        </form>
     </div>
     <div class="col-sm-6 px-1">
+    <form class="form-horizontal" id="soldForm2">
         <div class="form-group row">
             <label for="houseDecoration" class="col-4 col-form-label">房屋装修</label>
             <div class="col-8">
@@ -121,8 +124,10 @@
         </div>
         <div class="form-group row">
             <label for="houseAgency" class="col-4 col-form-label">代理人信息</label>
-            <div class="col-4">
-                <input type="text" class="form-control" name="Agency" id="houseAgency" placeholder="请选择">
+            <div class="col-4">              
+                <select class="form-control" name="Agency" id="houseAgency" >  
+                    <option>----------</option>            
+                </select>
             </div>
             <div class="col-3 btn btn-info">
                 点击选择
@@ -142,9 +147,10 @@
                 </div>
             </div>
         </div>
-
+    </form>
     </div>
     <div class="col-sm-6 px-1">
+    <form class="form-horizontal" id="soldForm3">
         <div class="form-group">
             <label for="houseTitle">房源标题(不超过25字)</label>
             <textarea class="form-control" name="Title" id="houseTitle" rows="2"></textarea>
@@ -153,10 +159,33 @@
         </div>
         <div class="form-group row">
             <label class="col-4 col-form-label">详细信息</label>
-            <div class="col-7 btn btn-info">
+            <div class="col-7 btn btn-info" data-toggle='modal' data-target='#detailModal'>
                 点击弹出框编辑
             </div>
         </div>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">详细信息编辑</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="detailForm">
+                            <label for="houseTitle">核心卖点</label>
+                            <textarea class="form-control" name="competence" id="houseCompetence" rows="4"></textarea>
+                            <label for="houseTitle">配套介绍(可选)</label>
+                            <textarea class="form-control" name="around" id="houseAround" rows="4"></textarea>                            
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">提交更改</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <div class="form-group row" id="labelZone"></div>
         <div class="form-group row">
             <label class="col-4 col-form-label">房屋图片</label>
 
@@ -198,13 +227,15 @@
                 <img class="h-100 w-100 m-0 sr-only" src="" >
             </div>
         </div>
+    </form>
     </div>
+    
     <div class="col-sm-6 px-1">
         <div class="mb-2">请设定房屋位置(点击地图设置标记)</div>
         <div id="container"></div>
 
     </div>
-<!--</form>-->
+
     <div class="w-100 py-2"></div>
 
     <div class="col-sm-12">

@@ -4,6 +4,8 @@ var priceInput = false;
 var areaInput = false;
 var titleInput = false;
 var nameInput = false;
+var agencyList =[];
+var labelList=[];
 
 window.onload = function () {
 
@@ -168,8 +170,42 @@ window.onload = function () {
         inputImage.disabled = true;
         inputImage.parentNode.className += ' disabled';
     }
+    //初始化地图
     initMap();
+    //从服务器获取经纪人和标签信息
+    initInfo();
+}
 
+var initInfo = function() {
+
+    var upData = $('#AgencyForm').serializeArray();
+
+    $.ajax({
+        url: "?s=/index/AddHouse/getAgencyAndLabelInfo",
+        type: 'get',
+        success: function (data) {
+            agencyList = data.agencyList;
+            labelList = data.labelList;
+
+            for(var i in agencyList){             
+                $('#houseAgency').append("<option value="+agencyList[i].id+">"+agencyList[i].name+"</option>");   
+            }
+
+            for(var j in labelList){             
+                $('#labelZone').append("<span class=\"badge badge-info\" value="+labelList[i].id+">"+labelList[i].name+"</span>");   
+            }
+
+            $("#labelZone").on("click","span",function(){
+                if(selectedLabel<3){
+                    $(this).toggleClass('badge-info').toggleClass('badge-success');
+                }
+                
+                if(){
+
+                }
+            });
+        }
+    });
 }
 
 var initMap = function() {
