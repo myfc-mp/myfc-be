@@ -13,7 +13,7 @@
         <div class="form-group row">
             <label for="houseLocation" class="col-4 col-form-label">行政区域</label>
             <div class="col-8">
-                <select class="form-control" name="Location" id="houseLocation" >
+                <select class="form-control" name="location" id="houseLocation" >
                     <option>锦江区</option>
                     <option>青羊区</option>
                     <option>武侯区</option>
@@ -89,7 +89,7 @@
         <div class="form-group row">
             <label for="houseDecoration" class="col-4 col-form-label">房屋装修</label>
             <div class="col-8">
-                <select class="form-control" name="Decoration" id="houseDecoration" >
+                <select class="form-control" name="decoration" id="houseDecoration" >
                     <option>清水</option>
                     <option>精装</option>
                     <option>豪装</option>
@@ -100,9 +100,9 @@
         <div class="form-group row">
             <label for="houseCategory" class="col-4 col-form-label">房屋类型</label>
             <div class="col-8">
-                <select class="form-control" name="Category" id="houseCategory" >
-                    <option>别墅</option>
+                <select class="form-control" name="category" id="houseCategory" >
                     <option>住宅</option>
+                    <option>别墅</option>
                     <option>公寓</option>
                     <option>写字楼</option>
                     <option>商铺</option>
@@ -113,7 +113,7 @@
         <div class="form-group row">
             <label for="houseType" class="col-4 col-form-label">房屋户型</label>
             <div class="col-8">
-                <select class="form-control" name="Type" id="houseType" >
+                <select class="form-control" name="type" id="houseType" >
                     <option>一室</option>
                     <option>二室</option>
                     <option>三室</option>
@@ -124,20 +124,17 @@
         </div>
         <div class="form-group row">
             <label for="houseAgency" class="col-4 col-form-label">代理人信息</label>
-            <div class="col-4">              
-                <select class="form-control" name="Agency" id="houseAgency" >  
-                    <option>----------</option>            
+            <div class="col-8">
+                <select class="form-control" name="agency" id="houseAgency" >
+                    <option>---------------</option>
                 </select>
-            </div>
-            <div class="col-3 btn btn-info">
-                点击选择
             </div>
         </div>
         <div class="form-group row">
             <label for="houseTotal" class="col-4 col-form-label">房屋总价</label>
             <div class="col-8">
                 <div class="input-group mb-0">
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="total" id="houseTotal" placeholder="请输入总价">
+                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="price_total" id="houseTotal" placeholder="请输入总价">
                     <div class="input-group-append">
                         <span class="input-group-text">万</span>
                     </div>
@@ -153,7 +150,7 @@
     <form class="form-horizontal" id="soldForm3">
         <div class="form-group">
             <label for="houseTitle">房源标题(不超过25字)</label>
-            <textarea class="form-control" name="Title" id="houseTitle" rows="2"></textarea>
+            <textarea class="form-control" name="title" id="houseTitle" rows="2"></textarea>
             <div class="text-danger sr-only small" id="titleInfoErr">
         </div>
         </div>
@@ -179,13 +176,15 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary">提交更改</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-        <div class="form-group row" id="labelZone"></div>
+        <div class="form-group row" id="labeldomain"><label class="col-12 col-form-label">请选择3个标签(多选无效)</label>
+            <div id="labelZone" class="mx-3"></div>
+        </div>
         <div class="form-group row">
             <label class="col-4 col-form-label">房屋图片</label>
 
@@ -239,7 +238,7 @@
     <div class="w-100 py-2"></div>
 
     <div class="col-sm-12">
-        <button id="addItem" class="btn btn-primary w-100">确定增加房屋</button>
+        <button id="addItem" class="btn btn-primary w-100 mb-5">确定增加房屋</button>
         <div class="text-danger sr-only small" id="submitInfoErr">
             信息填写不完整或有错误，请检查
         </div>

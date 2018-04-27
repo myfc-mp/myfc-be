@@ -8,9 +8,32 @@
 
 namespace app\index\model;
 
-
+use think\facade\Request;
 
 class ResoldItem extends BaseModel
 {
+    protected $hidden = ['delete_time','update_time'];
+    public function saveResold(){
+        $model = static::create([
+            'name'          =>  Request::param('name'),
+            'title'         =>  Request::param('title'),
+            'location'      =>  Request::param('location'),
+            'floor'         =>  Request::param('floor'),
+            'age'           =>  Request::param('age'),
+            'area'          =>  Request::param('area'),
+            'area_range'    =>  Request::param('area_range'),
+            'price_total'   =>  Request::param('price_total'),
+            'price_unit'    =>  Request::param('price_unit'),
+            'price_range'   =>  Request::param('price_range'),
+            'decoration'    =>  Request::param('decoration'),
+            'category'      =>  Request::param('category'),
+            'type'          =>  Request::param('type'),
+            'agency'        =>  Request::param('agency'),
+            'lat'           =>  Request::param('lat'),
+            'lng'           =>  Request::param('lng'),
+        ]);
+
+        return $model;
+    }
 
 }

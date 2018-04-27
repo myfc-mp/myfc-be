@@ -6,6 +6,7 @@ var titleInput = false;
 var nameInput = false;
 var agencyList =[];
 var labelList=[];
+var latlng = [30.6573435,104.0659188];//天府广场坐标
 
 window.onload = function () {
 
@@ -178,10 +179,8 @@ window.onload = function () {
 
 var initInfo = function() {
 
-    var upData = $('#AgencyForm').serializeArray();
-
     $.ajax({
-        url: "?s=/index/AddHouse/getAgencyAndLabelInfo",
+        url: "?s=/index/Add_house/getAgencyAndLabelInfo",
         type: 'get',
         success: function (data) {
             agencyList = data.agencyList;
@@ -192,17 +191,12 @@ var initInfo = function() {
             }
 
             for(var j in labelList){             
-                $('#labelZone').append("<span class=\"badge badge-info\" value="+labelList[i].id+">"+labelList[i].name+"</span>");   
+                $('#labelZone').append("<span class=\"badge btn font-weight-light m-1 badge-secondary\" value="+labelList[j].id+">"+labelList[j].description+"</span>");
             }
 
             $("#labelZone").on("click","span",function(){
-                if(selectedLabel<3){
-                    $(this).toggleClass('badge-info').toggleClass('badge-success');
-                }
-                
-                if(){
+                $(this).toggleClass('badge-secondary').toggleClass('badge-success');
 
-                }
             });
         }
     });
@@ -219,6 +213,7 @@ var initMap = function() {
     });
 
     qq.maps.event.addListener(map, 'click', function(event) {
+        latlng = event.latLng;
         var marker=new qq.maps.Marker({
             position:event.latLng,
             map:map
@@ -306,20 +301,117 @@ $('#addItem').click(function () {
         $('#submitInfoErr').removeClass('sr-only');
         return;
     }
-    console.log('hew rre');
-    var upData = $('#AgencyForm').serializeArray();
+
+    var upData = $('#soldForm1').serializeArray();
+    upData=upData.concat($('#soldForm2').serializeArray()).concat($('#soldForm3').serializeArray());
+
+
+    var badges = $("#labelZone").children("span.badge-success");
+    var badgeNo = [];
+    badges.map(function ()  {
+        badgeNo.push(parseInt(this.getAttribute('value')));
+        return this;
+    });
     upData.push({
-        'name':'avatar',
+        'name':'lat',
+        'value':latlng.lat
+    });
+    upData.push({
+        'name':'lng',
+        'value':latlng.lng
+    });
+    upData.push({
+        'name':'label',
+        'value':badgeNo
+    });
+    upData.push({
+        'name':'image',
         'value':lCropperInstance
     });
-    $(this).attr('disabled','disabled');
+    var lTotal,lArea;
+    for(var i in upData){
+        if(upData[i].name === 'price_total'){
+            lTotal = upData[i].value;
+        }
+        if(upData[i].name === 'area'){
+            lArea = upData[i].value;
+        }
+    }
+
+    var priceRange = null;
+    if(lTotal < 60){
+        priceRange = '60万以下';
+    }
+    else if(lTotal < 100){
+        priceRange = '60-100万';
+    }
+    else if(lTotal < 150){
+        priceRange = '100-150万';
+    }
+    else if(lTotal < 200){
+        priceRange = '150-200万';
+    }
+    else if(lTotal < 300){
+        priceRange = '200-300万';
+    }
+    else{
+        priceRange = '300万以上';
+    }
+
+    upData.push({
+        'name':'price_range',
+        'value':priceRange
+    });
+
+    var areaRange = null;
+    if(lArea < 50){
+        areaRange = '0-50';
+    }
+    else if(lArea < 70){
+        areaRange = '50-70';
+    }
+    else if(lArea < 90){
+        areaRange = '70-90';
+    }
+    else if(lArea < 110){
+        areaRange = '90-110';
+    }
+    else if(lArea < 130){
+        areaRange = '110-130';
+    }
+    else if(lArea < 150){
+        areaRange = '130-150';
+    }
+    else if(lArea < 200){
+        areaRange = '150-200';
+    }
+    else if(lArea < 300){
+        areaRange = '200-300';
+    }
+    else{
+        areaRange = '300以上';
+    }
+
+    upData.push({
+        'name':'area_range',
+        'value':areaRange
+    });
+
+    upData.push({
+        'name':'price_unit',
+        'value':Math.floor(lTotal*10000/lArea)
+    });
+
+    console.log(upData);
     $.ajax({
-        url: "?s=/index/stuff/uploadInfo",
+        // url: "?s=/index/Add_house/saveResoldInfo",
+        url:"index/addHouse?XDEBUG_SESSION_START=10413",
         type: 'post',
         data: upData,
         dataType: 'json',
         success: function (data) {
-            window.location.href="?s=/index/stuff/addAgencyResult/status/"+data.status;
+            // window.location.href="?s=/index/Add_house/addResoldResult/status/"+data.status;
+            console.log(data.status);
         }
     });
 });

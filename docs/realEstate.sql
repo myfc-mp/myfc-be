@@ -62,7 +62,6 @@ CREATE TABLE `label_house` (
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(50) NOT NULL COMMENT '房屋图片地址',
   `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
@@ -109,6 +108,7 @@ CREATE TABLE `resold_item` (
   `floor` varchar(6) NOT NULL COMMENT '房屋所在楼层，用作筛选', 
   `age` int(11) NOT NULL COMMENT '房屋建造时间',
   `area` varchar(10) NOT NULL COMMENT '房屋面积',
+  `area_range` varchar(10) NOT NULL COMMENT '房屋面积范围',
   `price_total` int(11) NOT NULL COMMENT '房屋总价',
   `price_unit` int(11) NOT NULL COMMENT '房屋单价',
   `price_range` varchar(16) NOT NULL COMMENT '总价范围',
@@ -116,7 +116,8 @@ CREATE TABLE `resold_item` (
   `category` varchar(6) NOT NULL COMMENT '房屋类型',
   `type` varchar(10) NOT NULL COMMENT '房屋户型',
   `agency` varchar(10) NOT NULL COMMENT '代理人信息',
-  `gps` int(11) NOT NULL COMMENT '房屋位置',
+  `lat` double NOT NULL COMMENT 'GPS纬度',
+  `lng` double NOT NULL COMMENT 'GPS经度',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -134,6 +135,7 @@ CREATE TABLE `rent_item` (
   `floor` varchar(6) NOT NULL COMMENT '房屋所在楼层，用作筛选', 
   `mode` varchar(4) NOT NULL COMMENT '租房模式',
   `area` varchar(10) NOT NULL COMMENT '房屋面积',
+  `area_range` varchar(10) NOT NULL COMMENT '房屋面积范围',
   `orientation` varchar(4) NOT NULL COMMENT '房屋朝向',
   `rental` int(11) NOT NULL COMMENT '月租金',
   `rental_range` varchar(16) NOT NULL COMMENT '租金范围',
@@ -141,7 +143,8 @@ CREATE TABLE `rent_item` (
   `category` varchar(6) NOT NULL COMMENT '房屋类型',
   `type` varchar(10) NOT NULL COMMENT '房屋户型',
   `agency` varchar(10) NOT NULL COMMENT '代理人信息',
-  `gps` int(11) NOT NULL COMMENT '房屋位置',
+  `lat` double NOT NULL COMMENT 'GPS纬度',
+  `lng` double NOT NULL COMMENT 'GPS经度',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)

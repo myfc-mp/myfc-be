@@ -17,7 +17,7 @@ Route::get('think', function () {
 // //修改经纪人信息
 // Route::get('index/modifyAgency', 'index/Stuff/modifyAgency');
 // //增加经纪人信息
-// Route::get('index/addAgency', 'index/Stuff/addAgency');
+Route::post('index/addHouse', 'index/Add_house/saveResoldInfo');
 return [
 
 ];
