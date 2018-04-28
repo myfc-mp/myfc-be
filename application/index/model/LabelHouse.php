@@ -12,7 +12,7 @@ namespace app\index\model;
 use think\facade\Request;
 use think\Model;
 
-class LabelHouse extends Model
+class LabelHouse extends BaseModel
 {
     public function saveLabel($id){
         $labelList = Request::param('label');
@@ -23,5 +23,9 @@ class LabelHouse extends Model
         }
 
         return static::saveAll($toSaveList);
+    }
+
+    public function deleteLabelFromDB($id){
+        return static::where('house_id','=',$id)->delete();
     }
 }

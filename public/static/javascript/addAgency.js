@@ -74,8 +74,10 @@ window.onload = function () {
             if (result) {
                 $('.img-container').addClass('sr-only');
                 var roundResult = getRoundedCanvas(result);
-                lCropperInstance = roundResult.toDataURL("image/png");
-                $('#img-output img').attr('src',lCropperInstance);
+                var imageObj = roundResult.toDataURL("image/png");
+                var imageList = imageObj.split(',');
+                lCropperInstance = imageList[1];
+                $('#img-output img').attr('src',imageObj);
                 avatarInput = true;    
                 if(checkInput()){
                     $('#register').removeClass('btn-secondary').addClass('btn-primary').removeAttr('disabled');

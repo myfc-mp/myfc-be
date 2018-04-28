@@ -8,22 +8,22 @@
 
 namespace app\index\model;
 
-use think\facade\Request;
-use think\Model;
 
-class Image extends Model
+use think\Model;
+use function app\base64_upload;
+
+class Image extends BaseModel
 {
-    public function saveImage($id){
-        $imageList = Request::param('image');
-        $imageNo = count($imageList);
-        foreach ($imageList as $item) {
-            $imageNo++;
+    public function saveImage($imageList,$id){
+        $toSaveList = [];
+        $no = 0;
+        foreach ($imageList as $item){
+            $image_name = $id.'_'.$no++.'.jpg';
+            //这里定义头像文件的保存路径，一定要用相对路径,特别注意大小写
+            $image_file = "../public/static/houseImage/".$image_name;
+            base64_upload($item, $image_file);
+            array_push($toSaveList,['house_id' =>$id,'url' =>$image_name ]);
         }
-//        $imageList = explode(",",$imageList);
-//        $toSaveList = [];
-//        foreach ($imageList as $item) {
-//            array_push($toSaveList,['house_id' =>$id , 'url' => $item ]);
-//        }
 
         return static::saveAll($toSaveList);
     }

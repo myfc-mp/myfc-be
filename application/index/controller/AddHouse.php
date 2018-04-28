@@ -13,8 +13,10 @@ use app\index\facade\Agency;
 use app\index\facade\Image;
 use app\index\facade\Label;
 use app\index\facade\LabelHouse;
+use app\index\facade\RentItem;
 use app\index\facade\ResoldItem;
 use think\Controller;
+use think\facade\Request;
 
 class AddHouse extends Controller
 {
@@ -26,14 +28,12 @@ class AddHouse extends Controller
 
     public function saveResoldInfo(){
         $houseModel = ResoldItem::saveResold();
-        $labelModel = LabelHouse::saveLabel($houseModel->id);
-        Image::saveImage($houseModel->id);
-        if($labelModel) {
-            //用保存数据库得到的id来给头像命名
-            $image_name = Request::param('id').'.jpg';
-            //这里定义头像文件的保存路径，一定要用相对路径,特别注意大小写
-            $image_file = "../public/static/personal/".$image_name;
-//            $this->base64_upload(Request::param('avatar'), $image_file);
+        LabelHouse::saveLabel($houseModel->id);
+        $imageList = Request::param('image');
+        $imageList = explode(",",$imageList);
+
+        $result = Image::saveImage($imageList,$houseModel->id);
+        if($result) {
             return ['status'=>'200'];
         }
 
@@ -44,6 +44,21 @@ class AddHouse extends Controller
         $this->assign('cssName','addRent');
         $this->assign('jsName','addRent');
         return $this->fetch();
+    }
+
+    public function saveRentInfo(){
+
+        $houseModel = RentItem::saveRent();
+        LabelHouse::saveLabel($houseModel->id);
+        $imageList = Request::param('image');
+        $imageList = explode(",",$imageList);
+
+        $result = Image::saveImage($imageList,$houseModel->id);
+        if($result) {
+            return ['status'=>'200'];
+        }
+
+        return ['status'=>'400'];
     }
 
     public function getAgencyAndLabelInfo(){
@@ -62,14 +77,29 @@ class AddHouse extends Controller
         $result = null;
         if($status == 200)
         {
-            $result = '注册成功';
+            $result = '添加成功';
         }
         else{
-            $result = '注册失败';
+            $result = '添加失败';
         }
         $this->assign('result',$result);
         $this->assign('cssName','addResoldResult');
         $this->assign('jsName','addResoldResult');
+        return $this->fetch();
+    }
+
+    public function addRentResult($status){
+        $result = null;
+        if($status == 200)
+        {
+            $result = '添加成功';
+        }
+        else{
+            $result = '添加失败';
+        }
+        $this->assign('result',$result);
+        $this->assign('cssName','addRentResult');
+        $this->assign('jsName','addRentResult');
         return $this->fetch();
     }
 }

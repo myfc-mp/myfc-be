@@ -33,11 +33,6 @@ window.onload = function () {
         $('button[data-method="scale"]').prop('disabled', true);
     }
 
-    // Download
-    // if (typeof download.download === 'undefined') {
-    //   download.className += ' disabled';
-    // }
-
     // Methods
     actions.querySelector('.docs-buttons').onclick = function (event) {
         var e = event || window.event;
@@ -50,19 +45,6 @@ window.onload = function () {
         if (!cropper) {
             return;
         }
-
-    
-        // while (target !== this) {
-        //     if (target.getAttribute('data-method')) {
-        //         break;
-        //     }
-        //
-        //     target = target.parentNode;
-        // }
-
-        // if (target === this || target.disabled || target.className.indexOf('disabled') > -1) {
-        //     return;
-        // }
 
         data = {
             method: target.getAttribute('data-method'),
@@ -92,10 +74,10 @@ window.onload = function () {
           
                 $('.img-container').addClass('sr-only');
                 var roundResult = getRoundedCanvas(result);
-                lCropperInstance = roundResult.toDataURL("image/png");
-                $('#img-output img').attr('src',lCropperInstance);
-                avatarInput = true;
-                
+                var imageObj = roundResult.toDataURL("image/png");
+                var imageList = imageObj.split(',');
+                lCropperInstance = imageList[1];
+                $('#img-output img').attr('src',imageObj);
             }
 
             if (typeof result === 'object' && result !== cropper && input) {

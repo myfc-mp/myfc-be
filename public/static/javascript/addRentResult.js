@@ -1,6 +1,6 @@
 $(document).ready(function(){
     //页面跳转事件
     $("#back").click(function(){
-        window.location.href="?s=/index/Add_house/addResold";
+        window.location.href="?s=/index/Add_house/addRent";
     });
 });

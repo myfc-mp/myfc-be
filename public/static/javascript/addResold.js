@@ -111,11 +111,13 @@ window.onload = function () {
             switch (data.method) {
                 case 'getCroppedCanvas':
                     if (result) {
-                        lCropperInstance.push(result.toDataURL("image/jpg"));
+                        var imageObj = result.toDataURL("image/jpg");
+                        var imageList = imageObj.split(',');
+                        lCropperInstance.push(imageList[1]);
                         var num = lCropperInstance.length;
 
                         var element = '#img-output'+num+' img';
-                        $(element).attr('src',lCropperInstance[num-1]).removeClass('sr-only');
+                        $(element).attr('src',imageObj).removeClass('sr-only');
                         switch (num){
                             case 1:
                                 $('#picGroup1').removeClass('sr-only');
@@ -404,14 +406,14 @@ $('#addItem').click(function () {
 
     console.log(upData);
     $.ajax({
-        // url: "?s=/index/Add_house/saveResoldInfo",
-        url:"index/addHouse?XDEBUG_SESSION_START=10413",
+        url: "?s=/index/Add_house/saveResoldInfo",
+        // url:"index/addHouse?XDEBUG_SESSION_START=18502",
         type: 'post',
         data: upData,
         dataType: 'json',
         success: function (data) {
-            // window.location.href="?s=/index/Add_house/addResoldResult/status/"+data.status;
-            console.log(data.status);
+            window.location.href="?s=/index/Add_house/addResoldResult/status/"+data.status;
+            // console.log(data.status);
         }
     });
 });

@@ -3,13 +3,13 @@ $(document).ready(function(){
     $("#addResold").click(function(){
         window.location.href="?s=/index/Add_house/addResold";
     });
-    $("#addrent").click(function(){
+    $("#addRent").click(function(){
         window.location.href="?s=/index/Add_house/addRent";
     });
     $("#mngResold").click(function(){
         window.location.href="?s=/index/Manage_house/mngResold";
     });
-    $("#mngrent").click(function(){
+    $("#mngRent").click(function(){
         window.location.href="?s=/index/Manage_house/mngRent";
     });
 
