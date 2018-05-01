@@ -1,0 +1,227 @@
+{extend name="public/base"}
+
+{block name="frame"}
+
+<div class="col-sm-6 px-1">
+    <form class="form-horizontal" id="soldForm1">
+        <div class="form-group row">
+            <label for="houseName" class="col-4 col-form-label">楼盘名称</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="name" id="houseName" data-id="{$id}">
+            </div>
+            <div class="col-8 offset-sm-4 text-danger sr-only small" id="nameInfoErr"></div>
+        </div>
+        <div class="form-group row">
+            <label for="houseLocation" class="col-4 col-form-label">行政区域</label>
+            <div class="col-8">
+                <select class="form-control" name="location" id="houseLocation" >
+                    <option>锦江区</option>
+                    <option>青羊区</option>
+                    <option>武侯区</option>
+                    <option>高新南区</option>
+                    <option>高新西区</option>
+                    <option>成华区</option>
+                    <option>金牛区</option>
+                    <option>郫都区</option>
+                    <option>天府新区</option>
+                    <option>双流</option>
+                    <option>温江</option>
+                    <option>龙泉驿</option>
+                    <option>新都</option>
+                    <option>青白江</option>
+                    <option>金堂</option>
+                    <option>大邑</option>
+                    <option>浦江</option>
+                    <option>新津</option>
+                    <option>彭州</option>
+                    <option>邛崃</option>
+                    <option>崇州</option>
+                    <option>都江堰</option>
+                    <option>简阳</option>
+                    <option>仁寿</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="houseFloor" class="col-4 col-form-label">楼层</label>
+            <div class="col-8">
+                <select class="form-control" name="floor" id="houseFloor" >
+                    <option>低楼层</option>
+                    <option>中楼层</option>
+                    <option>高楼层</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="houseMode" class="col-4 col-form-label">出租模式</label>
+            <div class="col-8">
+                <select class="form-control" name="mode" id="houseMode" >
+                    <option>整租</option>
+                    <option>合租</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseArea" class="col-4 col-form-label">房屋面积</label>
+            <div class="col-8">
+                <div class="input-group mb-0">
+                    <input type="text" class="form-control" name="area" id="houseArea" placeholder="请输入建筑面积">
+                    <div class="input-group-append">
+                        <span class="input-group-text">m<sup>2</sup></span>
+                    </div>
+                </div>
+                <div class="text-danger sr-only small" id="areaInfoErr">
+                    请输入正确面积
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div class="col-sm-6 px-1">
+    <form class="form-horizontal" id="soldForm2">
+        <div class="form-group row">
+            <label for="houseDecoration" class="col-4 col-form-label">房屋装修</label>
+            <div class="col-8">
+                <select class="form-control" name="decoration" id="houseDecoration" >
+                    <option>清水</option>
+                    <option>精装</option>
+                    <option>豪装</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="houseCategory" class="col-4 col-form-label">房屋类型</label>
+            <div class="col-8">
+                <select class="form-control" name="category" id="houseCategory" >
+                    <option>住宅</option>
+                    <option>别墅</option>
+                    <option>公寓</option>
+                    <option>写字楼</option>
+                    <option>商铺</option>
+                    <option>其他</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseType" class="col-4 col-form-label">房屋户型</label>
+            <div class="col-8">
+                <select class="form-control" name="type" id="houseType" >
+                    <option>一室</option>
+                    <option>二室</option>
+                    <option>三室</option>
+                    <option>四室</option>
+                    <option>五室及以上</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseAgency" class="col-4 col-form-label">代理人信息</label>
+            <div class="col-8">
+                <select class="form-control" name="agency" id="houseAgency" >
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="houseRental" class="col-4 col-form-label">月租金</label>
+            <div class="col-8">
+                <div class="input-group mb-0">
+                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="rental" id="houseRental" placeholder="请输入月租金">
+                    <div class="input-group-append">
+                        <span class="input-group-text">元</span>
+                    </div>
+                </div>
+                <div class="text-danger sr-only small" id="priceInfoErr">
+                    请输入正确价格
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-sm-6 px-1">
+    <form class="form-horizontal" id="soldForm3">
+        <div class="form-group">
+            <label for="houseTitle">房源标题(不超过25字)</label>
+            <textarea class="form-control" name="title" id="houseTitle" rows="2"></textarea>
+            <div class="text-danger sr-only small" id="titleInfoErr">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-4 col-form-label">详细信息</label>
+            <div class="col-7 btn btn-info" data-toggle='modal' data-target='#detailModal'>
+                点击弹出框编辑
+            </div>
+        </div>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">详细信息编辑</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="detailForm">
+                            <label for="houseTitle">核心卖点</label>
+                            <textarea class="form-control" name="competence" id="houseCompetence" rows="4"></textarea>
+                            <label for="houseTitle">配套介绍(可选)</label>
+                            <textarea class="form-control" name="around" id="houseAround" rows="4"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <div class="form-group row" id="labeldomain"><label class="col-12 col-form-label">请选择3个标签(多选无效)</label>
+            <div id="labelZone" class="mx-3"></div>
+        </div>
+        <div class="form-group row">
+            <label class="col-4 col-form-label">房屋图片</label>
+
+            <label for="inputImage" class="col-7 btn btn-info" id="inputLabel">
+                <input type="file" class="sr-only" id="inputImage" accept="image/*">
+                <span>点击选择图片(最多9张)</span>
+            </label>
+        </div>
+        <p id='picErrInfo' class="small text-danger">点击已选择图片，可删除</p>
+        <div id="picGroup" class="form-group row" ></div>
+    </form>
+</div>
+
+<div class="col-sm-6 px-1">
+    <div class="mb-2">请设定房屋位置(点击地图设置标记)</div>
+    <div id="container"></div>
+
+</div>
+
+<div class="w-100 py-2"></div>
+
+<div class="col-sm-12">
+    <div class="text-danger sr-only small text-center" id="submitInfoErr">
+        信息填写不完整或有错误，请检查
+    </div>
+    <button id="modifyItem" class="btn btn-primary w-100 mb-5">确定修改房屋</button>
+</div>
+<!-- 模态框（Modal） 用于遮罩效果-->
+<div id="myModal" class="modal fade" data-keyboard="false"
+     data-backdrop="static" data-role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div style="height: 300px;"></div>
+    <div id="loading" class="loading text-right m-auto rounded text-white">加载中。。。</div>
+</div>
+<!-- /.modal -->
+<div class="img-container sr-only">
+    <img src="" alt="Picture">
+</div>
+
+<div class="sr-only" id="tempContainer"></div>
+
+</div>
+
+{/block}

@@ -1,0 +1,50 @@
+{extend name="public/base"}
+
+{block name="frame"}
+
+<div class="col-sm-12 text-center px-0">
+    <div class="text-danger small">如果要修改现有门店信息，请删除后重新添加</div>
+    <table data-toggle="table" data-pagination="false" class="table table-bordered">
+        <thead class="thead-light">
+        <tr>
+
+            <th scope="col">门店名称</th>
+            <th scope="col">门店地址</th>
+            <th scope="col">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $list as $key=>$vo }
+        <tr>
+
+            <td>{$vo.name}</td>
+            <td>{$vo.address}</td>
+            <td>
+                <button data-id="{$vo.id}" data-name="{$vo.name}" class="btn btn-danger btn-sm deleteInfo">删除</button>
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    <button id="addItem" class="col-sm-6 btn btn-primary my-3">增加门店</button>
+    <div class="modal fade" id="deleteConfirm">
+        <div style="height: 200px;"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    是否确认删除&nbsp<span id="deleteName" class="text-danger"></span>&nbsp?
+                </div>
+                <hr>
+                <div class="mb-2 row justify-content-around">
+                    <button id="sureDelete" type="button" class="btn btn-danger" data-dismiss="modal">删除</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{/block}

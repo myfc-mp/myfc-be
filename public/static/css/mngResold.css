@@ -1,0 +1,5 @@
+@import url(bootstrap-table.min.css);
+
+td{
+    word-wrap: break-word;
+}

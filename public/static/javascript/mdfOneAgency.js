@@ -145,6 +145,7 @@ function getRoundedCanvas(sourceCanvas) {
  }
 
 $('#modify').click(function () {
+
     var upData = $('#AgencyForm').serializeArray();
     upData.push({
         'name':'avatar',

@@ -32,6 +32,8 @@ class RentItem extends BaseModel
             'agency'        =>  Request::param('agency'),
             'lat'           =>  Request::param('lat'),
             'lng'           =>  Request::param('lng'),
+            'competence'    =>  Request::param('competence'),
+            'around'        =>  Request::param('around'),
         ]);
 
         return $model;
@@ -46,5 +48,33 @@ class RentItem extends BaseModel
         $rent = self::get($id,'image');
 
         return $rent->together('image')->delete();
+    }
+
+    public function getOneRentFromDB($id){
+
+        return self::with(['label','image'])->find($id);
+    }
+
+    public function renewRent(){
+        $model = static::save([
+            'name'          =>  Request::param('name'),
+            'title'         =>  Request::param('title'),
+            'location'      =>  Request::param('location'),
+            'floor'         =>  Request::param('floor'),
+            'mode'          =>  Request::param('mode'),
+            'area'          =>  Request::param('area'),
+            'area_range'    =>  Request::param('area_range'),
+            'rental'        =>  Request::param('rental'),
+            'rental_range'  =>  Request::param('rental_range'),
+            'decoration'    =>  Request::param('decoration'),
+            'category'      =>  Request::param('category'),
+            'type'          =>  Request::param('type'),
+            'agency'        =>  Request::param('agency'),
+            'lat'           =>  Request::param('lat'),
+            'lng'           =>  Request::param('lng'),
+            'competence'    =>  Request::param('competence'),
+            'around'        =>  Request::param('around'),
+        ],['id' => Request::param('id')]);
+        return $model;
     }
 }

@@ -6,7 +6,7 @@ $(document).ready(function(){
     });
 
     $("table").on("click",".deleteInfo",function(){
-        console.log('ishere?');
+      
         deleteId=$(this).attr('data-id');
         $('#deleteConfirm').modal('toggle');
         $('#deleteName').text($(this).attr('data-name'));

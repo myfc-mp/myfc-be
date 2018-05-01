@@ -1,11 +1,11 @@
 {extend name="public/base"}
 
 {block name="frame"}
-<div class="col-sm-12 text-center">
+<div class="col-sm-12 text-center px-0">
     <table data-toggle="table" data-pagination="true" class="table table-bordered">
         <thead class="thead-light">
         <tr>
-            <th scope="col">ID</th>
+
             <th scope="col">楼盘</th>
             <th scope="col">标题</th>
             <th scope="col">操作</th>
@@ -14,7 +14,7 @@
         <tbody>
         {foreach $list as $key=>$vo }
         <tr>
-            <td>{$vo.id}</td>
+
             <td>{$vo.name}</td>
             <td>{$vo.title}</td>
             <td>
@@ -26,6 +26,7 @@
         </tbody>
     </table>
     <div class="modal fade" id="deleteConfirm">
+        <div style="height: 200px;"></div>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">

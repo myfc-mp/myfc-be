@@ -1,0 +1,49 @@
+{extend name="public/base"}
+
+{block name="frame"}
+
+<div class="col-sm-6 text-center">
+    <form class="form-horizontal" id="soldForm">
+        <div class="form-group row">
+            <label for="storeName" class="col-4 col-form-label">门店名称</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="name" id="storeName" placeholder="请输入门店名称">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="storePhone" class="col-4 col-form-label">门店电话</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="phone" id="storePhone" placeholder="请输入门店电话">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="storeAddress" class="col-4 col-form-label">门店地址</label>
+            <div class="col-8">
+                <input type="text" class="form-control" name="address" id="storeAddress" placeholder="请输入门店地址">
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="col-sm-6 px-1">
+    <div class="mb-2">请设定门店位置(点击地图设置标记)</div>
+    <div id="container"></div>
+</div>
+
+<div class="col-sm-6 offset-3">
+    <div class="text-danger sr-only small text-center" id="submitInfoErr">
+        信息填写不完整或有错误，请检查
+    </div>
+    <button id="addItem" class="btn btn-primary w-100 mb-5">确定增加门店</button>
+</div>
+<!-- 模态框（Modal） 用于遮罩效果-->
+<div id="myModal" class="modal fade" data-keyboard="false"
+     data-backdrop="static" data-role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div style="height: 300px;"></div>
+    <div id="loading" class="loading text-right m-auto rounded text-white">加载中。。。</div>
+</div>
+<!-- /.modal -->
+
+{/block}

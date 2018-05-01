@@ -2,7 +2,7 @@ $(document).ready(function(){
     var deleteId = null;
     $("table").on("click",".modifyInfo",function(){
         var modifyId = $(this).attr('data-id');
-        window.location.href="?s=/index/ManageHouse/modifyOneResold/id/"+modifyId;
+        window.location.href="?s=/index/Manage_house/modifyOneRent/id/"+modifyId;
     });
 
     $("table").on("click",".deleteInfo",function(){
