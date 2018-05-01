@@ -1,0 +1,64 @@
+{extend name="public/base"}
+
+{block name="frame"}
+
+<table class="table table-striped" data-serial="{$i=1}" >
+
+    <thead>
+    <tr>
+        <th scope="col">No</th>
+        <th scope="col">楼盘</th>
+        <th scope="col">标题</th>
+        <th scope="col">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $list as $key=>$vo }
+    <tr>
+        <th scope="row">{$i}</th>
+            <td>{$vo.name}</td>
+            <td>{$vo.title}</td>
+            <td>
+                <button id="{$i}" class="btn btn-warning btn-sm modifyInfo ">配置</button>
+                <button data-id="{$i++}" data-name="{$vo.name}" class="btn btn-danger btn-sm deleteInfo ">删除</button>
+            </td>
+    </tr>
+
+{/foreach}
+    </tbody>
+</table>
+
+<div class="modal fade" id="modifyChoose">
+    <div style="height: 200px;"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                请选择房源来源
+            </div>
+            <hr>
+            <div class="mb-2 row justify-content-around">
+                <button id="fromResold" type="button" class="btn btn-primary" data-dismiss="modal">出售房源</button>
+                <button id="fromRent" type="button" class="btn btn-primary" data-dismiss="modal">出租房源</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteConfirm">
+    <div style="height: 200px;"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                是否确认删除&nbsp<span id="deleteName" class="text-danger"></span>&nbsp?
+            </div>
+            <hr>
+            <div class="mb-2 row justify-content-around">
+                <button id="sureDelete" type="button" class="btn btn-danger" data-dismiss="modal">删除</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+{/block}

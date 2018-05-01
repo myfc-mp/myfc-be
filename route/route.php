@@ -12,12 +12,14 @@
 Route::get('think', function () {
     return 'hello,ThinkPHP5!';
 });
-// //新增二手出售房源
-// Route::get('index/addResold', 'index/AddHouse/resold');
-// //修改经纪人信息
-// Route::get('index/modifyAgency', 'index/Stuff/modifyAgency');
-// //增加经纪人信息
-//Route::post('index/addHouse/:id', 'index/ManageHouse/deleteRent');
+// 不参数的post
+//Route::post('index/addHouse/', 'index/ManageRecommend/fromResold');
+// 要加参数的post
+//Route::post('index/addHouse/:no', 'index/ManageRecommend/fromResold');
+// 不参数的get
+//Route::get('index/addHouse/', 'index/ManageRecommend/fromResold');
+// 要加参数的get
+//Route::get('index/addHouse/:id', 'index/ManageRecommend/fromResold');
 return [
 
 ];

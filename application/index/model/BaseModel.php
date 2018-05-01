@@ -28,4 +28,5 @@ class BaseModel extends Model
         //这个函数内部返回hasMany的值，hasMany是用于一对多的关联，表示本模型需要关联其他模型的多条记录
         return $this->hasMany('LabelHouse','house_id','id');
     }
+
 }

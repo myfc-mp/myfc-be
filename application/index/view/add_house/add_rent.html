@@ -9,6 +9,7 @@
             <div class="col-8">
                 <input type="text" class="form-control" name="name" id="houseName" placeholder="请输入楼盘名称">
             </div>
+            <div class="col-8 offset-sm-4 text-danger sr-only small" id="nameInfoErr"></div>
         </div>
         <div class="form-group row">
             <label for="houseLocation" class="col-4 col-form-label">行政区域</label>
@@ -121,7 +122,7 @@
             <label for="houseAgency" class="col-4 col-form-label">代理人信息</label>
             <div class="col-8">
                 <select class="form-control" name="agency" id="houseAgency" >
-                    <option>---------------</option>
+
                 </select>
             </div>
         </div>
@@ -188,39 +189,8 @@
                 <span>点击选择图片(最多9张)</span>
             </label>
         </div>
-        <div id="picGroup1" class="form-group row sr-only" style="height: 100px;">
-            <div class="col-4 h-100" id="img-output1">
-                <img class="h-100 w-100 m-0 sr-only" src="" >
-            </div>
-            <div class="col-4 h-100" id="img-output2">
-                <img class="h-100 w-100 m-0 sr-only" src="" >
-            </div>
-            <div class="col-4 h-100" id="img-output3">
-                <img class="h-100 w-100 m-0 sr-only" src="" >
-            </div>
-        </div>
-        <div id="picGroup2" class="form-group row sr-only" style="height: 100px;">
-            <div class="col-4 h-100" id="img-output4">
-                <img class="h-100 w-100 m-0 sr-only" src="" >
-            </div>
-            <div class="col-4 h-100" id="img-output5">
-                <img class="h-100 w-100 m-0 sr-only" src="" >
-            </div>
-            <div class="col-4 h-100" id="img-output6">
-                <img class="h-100 w-100 m-0 sr-only" src="" >
-            </div>
-        </div>
-        <div id="picGroup3" class="form-group row sr-only" style="height: 100px;">
-            <div class="col-4 h-100" id="img-output7">
-                <img class="h-100 w-100 m-0 sr-only" src="" >
-            </div>
-            <div class="col-4 h-100" id="img-output8">
-                <img class="h-100 w-100 m-0 sr-only" src="" >
-            </div>
-            <div class="col-4 h-100" id="img-output9">
-                <img class="h-100 w-100 m-0 sr-only" src="" >
-            </div>
-        </div>
+        <p id='picErrInfo' class="small text-danger sr-only">点击已选择图片，可删除</p>
+        <div id="picGroup" class="form-group row" ></div>
     </form>
 </div>
 
@@ -233,12 +203,19 @@
 <div class="w-100 py-2"></div>
 
 <div class="col-sm-12">
-    <button id="addItem" class="btn btn-primary w-100 mb-5">确定增加房屋</button>
-    <div class="text-danger sr-only small" id="submitInfoErr">
+    <div class="text-danger sr-only small text-center" id="submitInfoErr">
         信息填写不完整或有错误，请检查
     </div>
+    <button id="addItem" class="btn btn-primary w-100 mb-5">确定增加房屋</button>
 </div>
-
+<!-- 模态框（Modal） 用于遮罩效果-->
+<div id="myModal" class="modal fade" data-keyboard="false"
+     data-backdrop="static" data-role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div style="height: 300px;"></div>
+    <div id="loading" class="loading text-right m-auto rounded text-white">加载中。。。</div>
+</div>
+<!-- /.modal -->
 <div class="img-container sr-only">
     <img src="" alt="Picture">
 </div>

@@ -4,6 +4,7 @@ var priceInput = false;
 var areaInput = false;
 var titleInput = false;
 var nameInput = false;
+var haveAddPic = 0;
 var agencyList =[];
 var labelList=[];
 var latlng = [30.6573435,104.0659188];//天府广场坐标
@@ -54,7 +55,7 @@ window.onload = function () {
                 var data = {
                     method: "getCroppedCanvas",
                     target: null,
-                    option: '{ "maxWidth": 800, "maxHeight": 800 }',
+                    option: '{ "maxWidth": 600, "maxHeight": 600 }',
                     secondOption: undefined
                 };
                 dealPic(data);
@@ -95,7 +96,7 @@ window.onload = function () {
                     } catch (e) {
                         console.log(e.message);
                     }
-                    console.log(data.option);
+
                     if (uploadedImageType === 'image/jpeg') {
                         if (!data.option) {
                             data.option = {};
@@ -114,23 +115,17 @@ window.onload = function () {
                         var imageObj = result.toDataURL("image/jpg");
                         var imageList = imageObj.split(',');
                         lCropperInstance.push(imageList[1]);
-                        var num = lCropperInstance.length;
+                        var toBeAppend = "<div data-no='"+(haveAddPic++)+"' class='col-4 mb-3'></div>";
+                        var appendDiv = $(toBeAppend).appendTo('#picGroup');
+                        var appendPic = $("<img class='h-100 w-100 m-0'>").appendTo(appendDiv);
+                        $(appendPic).attr('src',imageObj);
 
-                        var element = '#img-output'+num+' img';
-                        $(element).attr('src',imageObj).removeClass('sr-only');
-                        switch (num){
-                            case 1:
-                                $('#picGroup1').removeClass('sr-only');
-                                break;
-                            case 4:
-                                $('#picGroup2').removeClass('sr-only');
-                                break;
-                            case 7:
-                                $('#picGroup3').removeClass('sr-only');
-                                break;
-                            case 9:
-                                $('#inputLabel').removeClass('btn-info').addClass('btn-secondary');
-                                $('#inputImage').attr('disabled','disabled');
+                        if(lCropperInstance.length > 0){
+                            $('#picErrInfo').removeClass('sr-only');
+                        }
+                        if(lCropperInstance.length >= 9){
+                            $('#inputLabel').removeClass('btn-info').addClass('btn-secondary');
+                            $('#inputImage').attr('disabled','disabled');
                         }
                     }
 
@@ -177,6 +172,21 @@ window.onload = function () {
     initMap();
     //从服务器获取经纪人和标签信息
     initInfo();
+    //在选择了图片以后，可以点击删除
+    $("#picGroup").on("click","div",function(){
+        var delId = $('#picGroup').index(this);
+        lCropperInstance.splice(delId,1);
+        $(this).remove();
+
+        if(lCropperInstance.length == 0){
+            $('#picErrInfo').addClass('sr-only');
+        }
+
+        if(lCropperInstance.length < 9){
+            $('#inputLabel').removeClass('btn-secondary').addClass('btn-info');
+            $('#inputImage').removeAttr('disabled');
+        }
+    });
 }
 
 var initInfo = function() {
@@ -252,13 +262,21 @@ $('#houseArea').blur(function () {
 
 });
 
-$('#houseName').blur(function () {
+$('#houseName').bind('input propertychange', function() {
+    var   inputLength = $('#houseName').val().length;
+    var   last   =   15-inputLength;
 
-    if($('#houseArea').val().length > 0){
-        $('#areaInfoErr').addClass('sr-only');
-        nameInput = true;
+    if(inputLength <= 15)   {
+        $('#nameInfoErr').removeClass('sr-only').removeClass('text-danger').addClass('text-success').text("已输入"+inputLength+"个字符，还可以输入"+last+"个");
+        if(inputLength>0){
+            nameInput = true;
+        }
+        else{
+            nameInput = false;
+        }
     }
     else{
+        $('#nameInfoErr').removeClass('sr-only').removeClass('text-success').addClass('text-danger').text("字数超出限制");
         nameInput = false;
     }
 });
@@ -269,7 +287,7 @@ $('#houseTitle').bind('input propertychange', function(){
     var   inputLength = $('#houseTitle').val().length;
     var   last   =   25-inputLength;
 
-    if(inputLength < 25)   {
+    if(inputLength <= 25)   {
         $('#titleInfoErr').removeClass('sr-only').removeClass('text-danger').addClass('text-success').text("已输入"+inputLength+"个字符，还可以输入"+last+"个");
         if(inputLength>0){
             titleInput = true;
@@ -298,11 +316,13 @@ $('#houseAge').blur(function () {
 });
 
 $('#addItem').click(function () {
-    if(!(ageInput && priceInput && areaInput && titleInput)){
+    if(!(ageInput && priceInput && areaInput && titleInput && nameInput)){
 
         $('#submitInfoErr').removeClass('sr-only');
         return;
     }
+
+    $('#myModal').modal('show');
 
     var upData = $('#soldForm1').serializeArray();
     upData=upData.concat($('#soldForm2').serializeArray()).concat($('#soldForm3').serializeArray());
@@ -404,7 +424,7 @@ $('#addItem').click(function () {
         'value':Math.floor(lTotal*10000/lArea)
     });
 
-    console.log(upData);
+
     $.ajax({
         url: "?s=/index/Add_house/saveResoldInfo",
         // url:"index/addHouse?XDEBUG_SESSION_START=18502",

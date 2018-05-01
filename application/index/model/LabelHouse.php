@@ -14,6 +14,7 @@ use think\Model;
 
 class LabelHouse extends BaseModel
 {
+    protected $hidden = ['delete_time','update_time','house_id'];
     public function saveLabel($id){
         $labelList = Request::param('label');
         $labelList = explode(",",$labelList);

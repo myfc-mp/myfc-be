@@ -9,10 +9,12 @@
 namespace app\index\controller;
 
 
+use app\index\facade\Image;
 use app\index\facade\RentItem;
 use app\index\facade\ResoldItem;
 use app\index\facade\LabelHouse;
 use think\Controller;
+use think\facade\Request;
 
 class ManageHouse extends Controller
 {
@@ -75,5 +77,48 @@ class ManageHouse extends Controller
         $this->assign('jsName','mdfOneResold');
         return $this->fetch();
 
+    }
+
+    public function getOneResold($id){
+        $list = ResoldItem::getOneResoldFromDB($id);
+
+        return $list;
+
+    }
+
+    public function updateResoldInfo($id){
+        $model = ResoldItem::renewResold();
+        $imageList = Request::param('image');
+        $imageList = explode(",",$imageList);
+        Image::updateImage($imageList,$id);
+        LabelHouse::deleteLabelFromDB($id);
+        LabelHouse::saveLabel($id);
+        return ['status'=>$model];
+    }
+
+    public function modifyOneRent($id){
+
+        $this->assign('id',$id);
+        $this->assign('cssName','addRent');
+        $this->assign('jsName','mdfOneRent');
+        return $this->fetch();
+
+    }
+
+    public function getOneRent($id){
+        $list = RentItem::getOneRentFromDB($id);
+
+        return $list;
+
+    }
+
+    public function updateRentInfo($id){
+        $model = RentItem::renewRent();
+        $imageList = Request::param('image');
+        $imageList = explode(",",$imageList);
+        Image::updateImage($imageList,$id);
+        LabelHouse::deleteLabelFromDB($id);
+        LabelHouse::saveLabel($id);
+        return ['status'=>$model];
     }
 }

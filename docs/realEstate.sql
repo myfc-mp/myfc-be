@@ -63,6 +63,7 @@ DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
+  `url` varchar(50) NOT NULL COMMENT '房屋图片地址',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -114,8 +115,8 @@ CREATE TABLE `resold_item` (
   `price_range` varchar(16) NOT NULL COMMENT '总价范围',
   `decoration` varchar(4) NOT NULL COMMENT '房屋装修情况',
   `category` varchar(6) NOT NULL COMMENT '房屋类型',
-  'around' text(0) COMMENT '房屋配套',
-  'competence' text(0) COMMENT '核心卖点',
+  `around` text NOT NULL COMMENT '房屋配套',
+  `competence` text NOT NULL COMMENT '核心卖点',
   `type` varchar(10) NOT NULL COMMENT '房屋户型',
   `agency` varchar(10) NOT NULL COMMENT '代理人信息',
   `lat` double NOT NULL COMMENT 'GPS纬度',
@@ -143,8 +144,8 @@ CREATE TABLE `rent_item` (
   `decoration` varchar(4) NOT NULL COMMENT '房屋装修情况',
   `category` varchar(6) NOT NULL COMMENT '房屋类型',
   `type` varchar(10) NOT NULL COMMENT '房屋户型',
-  'around' text(0) COMMENT '房屋配套',
-  'competence' text(0) COMMENT '核心卖点',
+  `around` text NOT NULL COMMENT '房屋配套',
+  `competence` text NOT NULL COMMENT '核心卖点',
   `agency` varchar(10) NOT NULL COMMENT '代理人信息',
   `lat` double NOT NULL COMMENT 'GPS纬度',
   `lng` double NOT NULL COMMENT 'GPS经度',
@@ -155,25 +156,55 @@ CREATE TABLE `rent_item` (
 
 
 -- ----------------------------
--- Table structure for third_app
+-- Table structure for store
 -- ----------------------------
-DROP TABLE IF EXISTS `third_app`;
-CREATE TABLE `third_app` (
+DROP TABLE IF EXISTS `store`;
+CREATE TABLE `store` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_id` varchar(64) NOT NULL COMMENT '应用app_id',
-  `app_secret` varchar(64) NOT NULL COMMENT '应用secret',
-  `app_description` varchar(100) DEFAULT NULL COMMENT '应用程序描述',
-  `scope` varchar(20) NOT NULL COMMENT '应用权限',
-  `scope_description` varchar(100) DEFAULT NULL COMMENT '权限描述',
+  `name` varchar(64) NOT NULL COMMENT '门店名字',
+  `phone` varchar(12) NOT NULL COMMENT '联系电话',
+  `address` varchar(80) DEFAULT NULL COMMENT '门店地址',
+  `lat` double NOT NULL COMMENT 'GPS纬度',
+  `lng` double NOT NULL COMMENT 'GPS经度',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='访问API的各应用账号密码表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='门店信息表';
 
--- ----------------------------
--- Records of third_app
--- ----------------------------
-INSERT INTO `third_app` VALUES ('1', 'admin', '777*777', 'CMS', '32', 'Super', null, null);
+-- --------------------------------
+-- Table structure for advertising
+-- --------------------------------
+DROP TABLE IF EXISTS `carousel`;
+CREATE TABLE `carousel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(50) NOT NULL COMMENT 'carousel图片地址',
+  `delete_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------
+-- Table structure for recommend
+-- --------------------------------
+DROP TABLE IF EXISTS `recommend`;
+CREATE TABLE `recommend` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `config` tinyint NOT NULL COMMENT '是否配置',
+  `label` varchar(10) NOT NULL COMMENT '封推标签',
+  `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
+  `delete_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `recommend` VALUES ('1', '独家', '0' , '0'  , null, null);
+INSERT INTO `recommend` VALUES ('2', '独家', '0' , '0'  , null, null);
+INSERT INTO `recommend` VALUES ('3', '独家', '0' , '0'  , null, null);
+INSERT INTO `recommend` VALUES ('4', '独家', '0' , '0'  , null, null);
+INSERT INTO `recommend` VALUES ('5', '独家', '0' , '0'  , null, null);
+INSERT INTO `recommend` VALUES ('6', '独家', '0' , '0'  , null, null);
+INSERT INTO `recommend` VALUES ('7', '独家', '0' , '0'  , null, null);
+INSERT INTO `recommend` VALUES ('8', '独家', '0' , '0'  , null, null);
+INSERT INTO `recommend` VALUES ('9', '独家', '0' , '0'  , null, null);
 
 SET FOREIGN_KEY_CHECKS=1;
