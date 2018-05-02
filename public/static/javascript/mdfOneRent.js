@@ -565,7 +565,7 @@ $('#modifyItem').click(function () {
     console.log(upData);
     $.ajax({
         url: "?s=/index/Manage_house/updateRentInfo/id/"+$('#houseName').attr('data-id'),
-        url:"index/addtoHouse/"+$('#houseName').attr('data-id')+"?XDEBUG_SESSION_START=13299",
+        // url:"index/addtoHouse/"+$('#houseName').attr('data-id')+"?XDEBUG_SESSION_START=13299",
         type: 'post',
         data: upData,
         dataType: 'json',
