@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS `label`;
 CREATE TABLE `label` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(10) NOT NULL COMMENT '房屋标签',
+  `back_color` varchar(20) NOT NULL COMMENT '房屋标签背景颜色',
+  `font_color` varchar(20) NOT NULL COMMENT '房屋标签字体颜色',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -15,37 +17,38 @@ CREATE TABLE `label` (
 -- ----------------------------
 -- Records of label
 -- ----------------------------
-INSERT INTO `label` VALUES ('1',  '地铁沿线'  , null, null);
-INSERT INTO `label` VALUES ('2',  '繁华地段'  , null, null);
-INSERT INTO `label` VALUES ('3',  '配套成熟'  , null, null);
-INSERT INTO `label` VALUES ('4',  '交通便利'  , null, null);
-INSERT INTO `label` VALUES ('5',  '医疗发达'  , null, null);
-INSERT INTO `label` VALUES ('6',  '优质学区'  , null, null);
-INSERT INTO `label` VALUES ('7',  '位置安静'  , null, null);
-INSERT INTO `label` VALUES ('8',  '人车分流'  , null, null);
-INSERT INTO `label` VALUES ('9',  '酒店式公寓', null, null);
-INSERT INTO `label` VALUES ('10', '综合体'    , null, null);
-INSERT INTO `label` VALUES ('11', '品牌开发商', null, null);
-INSERT INTO `label` VALUES ('12', '环境优美'  , null, null);
-INSERT INTO `label` VALUES ('13', '江景房'    , null, null);
-INSERT INTO `label` VALUES ('14', '临公园'    , null, null);
-INSERT INTO `label` VALUES ('15', '刚需房'    , null, null);
-INSERT INTO `label` VALUES ('16', '改善房'    , null, null);
-INSERT INTO `label` VALUES ('17', '福利房'    , null, null);
-INSERT INTO `label` VALUES ('18', '南北通透'  , null, null);
-INSERT INTO `label` VALUES ('19', '投资地产'  , null, null);
-INSERT INTO `label` VALUES ('20', '品质小区'  , null, null);
-INSERT INTO `label` VALUES ('21', '素质住户'  , null, null);
-INSERT INTO `label` VALUES ('22', '拎包入住'  , null, null);
-INSERT INTO `label` VALUES ('23', '地下室'    , null, null);
-INSERT INTO `label` VALUES ('24', '大露台'    , null, null);
-INSERT INTO `label` VALUES ('25', '低单价'    , null, null);
-INSERT INTO `label` VALUES ('26', '低总价'    , null, null);
+INSERT INTO `label` (`id`, `description`, `back_color`, `font_color`, `delete_time`, `update_time`) VALUES
+(1, '地铁沿线', 'RGB(231,247,253)', 'RGB(46,117,182)', NULL, NULL),
+(2, '繁华地段', 'RGB(231,247,253)', 'RGB(46,117,182)', NULL, NULL),
+(3, '配套成熟', 'RGB(231,247,253)', 'RGB(46,117,182)', NULL, NULL),
+(4, '交通便利', 'RGB(231,247,253)', 'RGB(46,117,182)', NULL, NULL),
+(5, '医疗发达', 'RGB(231,247,253)', 'RGB(46,117,182)', NULL, NULL),
+(6, '优质学区', 'RGB(255,241,239)', 'RGB(197,90,17)', NULL, NULL),
+(7, '位置安静', 'RGB(255,241,239)', 'RGB(197,90,17)', NULL, NULL),
+(8, '人车分流', 'RGB(255,241,239)', 'RGB(197,90,17)', NULL, NULL),
+(9, '酒店式公寓', 'RGB(255,241,239)', 'RGB(197,90,17)', NULL, NULL),
+(10, '综合体', 'RGB(255,241,239)', 'RGB(197,90,17)', NULL, NULL),
+(11, '品牌开发商', 'RGB(255,241,239)', 'RGB(197,90,17)', NULL, NULL),
+(12, '环境优美', 'RGB(231,247,253)', 'RGB(46,117,182)', NULL, NULL),
+(13, '江景房', 'RGB(247,250,214)', 'RGB(168,128,0)', NULL, NULL),
+(14, '临公园', 'RGB(247,250,214)', 'RGB(168,128,0)', NULL, NULL),
+(15, '刚需房', 'RGB(247,250,214)', 'RGB(168,128,0)', NULL, NULL),
+(16, '改善房', 'RGB(247,250,214)', 'RGB(168,128,0)', NULL, NULL),
+(17, '福利房', 'RGB(247,250,214)', 'RGB(168,128,0)', NULL, NULL),
+(18, '南北通透', 'RGB(247,250,214)', 'RGB(168,128,0)', NULL, NULL),
+(19, '投资地产', 'RGB(244,232,248)', 'RGB(142,74,172)', NULL, NULL),
+(20, '品质小区', 'RGB(244,232,248)', 'RGB(142,74,172)', NULL, NULL),
+(21, '素质住户', 'RGB(244,232,248)', 'RGB(142,74,172)', NULL, NULL),
+(22, '拎包入住', 'RGB(244,232,248)', 'RGB(142,74,172)', NULL, NULL),
+(23, '地下室', 'RGB(244,232,248)', 'RGB(142,74,172)', NULL, NULL),
+(24, '大露台', 'RGB(244,232,248)', 'RGB(142,74,172)', NULL, NULL),
+(25, '低单价', 'RGB(231,247,253)', 'RGB(46,117,182)', NULL, NULL),
+(26, '低总价', 'RGB(244,232,248)', 'RGB(142,74,172)', NULL, NULL);
 
 
--- -------------------------------
--- Table structure for label_house
--- -------------------------------
+-------------------------------
+Table structure for label_house
+-------------------------------
 DROP TABLE IF EXISTS `label_house`;
 CREATE TABLE `label_house` (
   `label_id` int(11) NOT NULL COMMENT '作为外键与标签信息关联',
@@ -190,7 +193,7 @@ DROP TABLE IF EXISTS `recommend`;
 CREATE TABLE `recommend` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `config` tinyint NOT NULL COMMENT '是否配置',
-  `label` varchar(10) NOT NULL COMMENT '封推标签',
+  `label` varchar(50) NOT NULL COMMENT '封推标签图片地址',
   `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,

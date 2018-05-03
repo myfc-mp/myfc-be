@@ -29,6 +29,11 @@ class BaseModel extends Model
         return $this->hasMany('LabelHouse','house_id','id');
     }
 
+    public function agency(){
+        //这个函数内部返回hasMany的值，hasMany是用于一对多的关联，表示本模型需要关联其他模型的多条记录
+        return $this->belongsTo('Agency','agency','id');
+    }
+
     public function labelName(){
         //多对多的关联查询，需要使用belongsToMany，其包含4个参数
         //参数一：关联查询的model名（其实也就是关联查询的表）
@@ -37,6 +42,11 @@ class BaseModel extends Model
         //参数四：中间表中对于参数二的索引
         return $this->belongsToMany('Label','Label_house','Label_id'
             ,'house_id');
+    }
+
+    public function avatar(){
+
+        return $this->hasOne('Avatar','agency_id','id');
     }
 
 }

@@ -1,4 +1,6 @@
-body  {  
+/*使用微信内置浏览器直接登录的时候，会使用大字体把格式搞乱*/
+/*如下代码解决苹果微信该问题*/
+body  {
         -webkit-text-size-adjust: 100% !important;  
         text-size-adjust: 100% !important;  
         -moz-text-size-adjust: 100% !important;  

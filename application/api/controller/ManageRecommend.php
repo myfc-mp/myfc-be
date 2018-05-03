@@ -19,15 +19,19 @@ class ManageRecommend extends Controller
         $list = Recommend::getRecommendFromDB();
         $recommendList = [];
         foreach ($list as $item) {
-            if($item->house_id < 100000){
-                array_push($recommendList,ResoldItem::getOneResoldFromDB($item->house_id));
-            }
-            else{
-                array_push($recommendList,RentItem::getOneRentFromDB($item->house_id));
-
+            if($item->config){
+                if($item->house_id < 100000){
+                    $recommendItem = ResoldItem::getOneResoldFromDB($item->house_id);
+                    $recommendItem->recommendLabel = $item->label;
+                    array_push($recommendList,$recommendItem);
+                }
+                else{
+                    $recommendItem = RentItem::getOneRentFromDB($item->house_id);
+                    $recommendItem->recommendLabel = $item->label;
+                    array_push($recommendList,$recommendItem);
+                }
             }
         }
-
         return $recommendList;
     }
 }

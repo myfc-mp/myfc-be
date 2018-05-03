@@ -31,8 +31,8 @@ $(document).ready(function(){
             // url:"index/addHouse/"+deleteId+"?XDEBUG_SESSION_START=15405",
             type: 'post',
             success: function (data) {
-                // window.location.href="?s=/index/Manage_house/mngRent";
-                console.log(data.status);
+                window.location.href="?s=/index/Manage_recommend/getRecommendInfo";
+                // console.log(data.status);
             }
         });
     })
