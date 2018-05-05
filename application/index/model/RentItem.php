@@ -52,7 +52,7 @@ class RentItem extends BaseModel
 
     public function getOneRentFromDB($id){
 
-        return self::with(['label','image'])->find($id);
+        return self::with(['label','image','labelName','agency.avatar'])->find($id);
     }
 
     public function renewRent(){

@@ -413,9 +413,9 @@ $('#houseName').bind('input propertychange', function() {
 $('#houseTitle').bind('input propertychange', function(){
 
     var   inputLength = $('#houseTitle').val().length;
-    var   last   =   25-inputLength;
+    var   last   =   30-inputLength;
 
-    if(inputLength <= 25)   {
+    if(inputLength <= 30)   {
         $('#titleInfoErr').removeClass('sr-only').removeClass('text-danger').addClass('text-success').text("已输入"+inputLength+"个字符，还可以输入"+last+"个");
         if(inputLength>0){
             titleInput = true;

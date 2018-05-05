@@ -27,14 +27,7 @@ class ManageRecommend extends Controller
 
             }
         }
-//        foreach ($list as $item) {
-//            if($item->house_id < 100000){
-//                $recommendList[$item->id]=ResoldItem::getOneResoldFromDB($item->house_id);
-//            }
-//            else{
-//                $recommendList[$item->id]=RentItem::getOneRentFromDB($item->house_id);
-//            }
-//        }
+
         $this->assign('list',$recommendList);
         $this->assign('cssName','getRecommendInfo');
         $this->assign('jsName','getRecommendInfo');

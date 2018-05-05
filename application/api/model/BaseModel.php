@@ -2,12 +2,11 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2018/4/22/022
- * Time: 11:25
+ * Date: 2018/5/2/002
+ * Time: 9:30
  */
 
-namespace app\index\model;
-
+namespace app\api\model;
 
 use think\Model;
 
@@ -27,26 +26,6 @@ class BaseModel extends Model
     public function label(){
         //这个函数内部返回hasMany的值，hasMany是用于一对多的关联，表示本模型需要关联其他模型的多条记录
         return $this->hasMany('LabelHouse','house_id','id');
-    }
-
-    public function agency(){
-        //这个函数内部返回hasMany的值，hasMany是用于一对多的关联，表示本模型需要关联其他模型的多条记录
-        return $this->belongsTo('Agency','agency','id');
-    }
-
-    public function labelName(){
-        //多对多的关联查询，需要使用belongsToMany，其包含4个参数
-        //参数一：关联查询的model名（其实也就是关联查询的表）
-        //参数二：由于是多对多的查询，一定会有另外一张表来做中间关联，参数二就是中间表的名字
-        //参数三：中间表中对于参数一的索引
-        //参数四：中间表中对于参数二的索引
-        return $this->belongsToMany('Label','Label_house','Label_id'
-            ,'house_id');
-    }
-
-    public function avatar(){
-
-        return $this->hasOne('Avatar','agency_id','id');
     }
 
 }

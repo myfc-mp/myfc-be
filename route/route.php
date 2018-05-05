@@ -13,11 +13,11 @@ Route::get('think', function () {
     return 'hello,ThinkPHP5!';
 });
 // 不参数的post
-//Route::post('index/addHouse/', 'index/ManageRecommend/fromResold');
+Route::post('index/addHouse', 'api/GetHouse/getRentHouse');
 // 要加参数的post
 //Route::post('index/addHouse/:no', 'index/ManageRecommend/fromResold');
 // 不参数的get
-//Route::get('index/addHouse/', 'index/ManageRecommend/fromResold');
+//Route::get('index/addHouse', 'api/ManageRecommend/getRecommendInfo');
 // 要加参数的get
 //Route::get('index/addHouse/:id', 'index/ManageRecommend/fromResold');
 return [

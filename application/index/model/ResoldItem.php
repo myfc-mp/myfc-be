@@ -51,7 +51,7 @@ class ResoldItem extends BaseModel
 
     public function getOneResoldFromDB($id){
 
-        return self::with(['label','image'])->find($id);
+        return self::with(['label','image','labelName','agency.avatar'])->find($id);
     }
 
     public function renewResold(){

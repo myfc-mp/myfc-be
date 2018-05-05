@@ -420,9 +420,9 @@ $('#houseName').bind('input propertychange', function() {
 $('#houseTitle').bind('input propertychange', function(){
 
     var   inputLength = $('#houseTitle').val().length;
-    var   last   =   25-inputLength;
+    var   last   =   30-inputLength;
 
-    if(inputLength <= 25)   {
+    if(inputLength <= 30)   {
         $('#titleInfoErr').removeClass('sr-only').removeClass('text-danger').addClass('text-success').text("已输入"+inputLength+"个字符，还可以输入"+last+"个");
         if(inputLength>0){
             titleInput = true;
@@ -565,7 +565,7 @@ $('#modifyItem').click(function () {
     console.log(upData);
     $.ajax({
         url: "?s=/index/Manage_house/updateRentInfo/id/"+$('#houseName').attr('data-id'),
-        url:"index/addtoHouse/"+$('#houseName').attr('data-id')+"?XDEBUG_SESSION_START=13299",
+        // url:"index/addtoHouse/"+$('#houseName').attr('data-id')+"?XDEBUG_SESSION_START=13299",
         type: 'post',
         data: upData,
         dataType: 'json',
