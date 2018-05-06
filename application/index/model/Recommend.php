@@ -9,6 +9,7 @@
 namespace app\index\model;
 
 
+use think\facade\Config;
 use think\facade\Request;
 
 class Recommend extends BaseModel
@@ -21,7 +22,7 @@ class Recommend extends BaseModel
 
         $model = static::save([
             'house_id'    =>  Request::param('configHouseID'),
-            'label'       =>  Request::param('labelRadios'),
+            'label'       =>  Config::get('setting.root_prefix').Request::param('labelRadios'),
             'config'      =>  '1',
         ],['id' => Request::param('recommendID')]);
         return $model;

@@ -8,7 +8,7 @@
 
 namespace app\index\model;
 
-
+use think\facade\Config;
 use function app\base64_upload;
 
 class Image extends BaseModel
@@ -20,9 +20,9 @@ class Image extends BaseModel
         foreach ($imageList as $item){
             $image_name = $id.'_'.$no++.'.jpg';
             //这里定义头像文件的保存路径，一定要用相对路径,特别注意大小写
-            $image_file = "../public/static/houseImage/".$image_name;
+            $image_file = "static/houseImage/".$image_name;
             base64_upload($item, $image_file);
-            array_push($toSaveList,['house_id' =>$id,'url' =>$image_name ]);
+            array_push($toSaveList,['house_id' =>$id,'url' =>Config::get('setting.house_prefix').$image_name ]);
         }
 
         return static::saveAll($toSaveList);
@@ -40,9 +40,9 @@ class Image extends BaseModel
         foreach ($imageList as $item){
             $image_name = $id.'_'.$no++.'.jpg';
             //这里定义头像文件的保存路径，一定要用相对路径,特别注意大小写
-            $image_file = "../public/static/houseImage/".$image_name;
+            $image_file = "static/houseImage/".$image_name;
             base64_upload($item, $image_file);
-            array_push($toSaveList,['house_id' =>$id,'url' =>$image_name ]);
+            array_push($toSaveList,['house_id' =>$id,'url' =>Config::get('setting.house_prefix').$image_name ]);
         }
 
         return static::saveAll($toSaveList);

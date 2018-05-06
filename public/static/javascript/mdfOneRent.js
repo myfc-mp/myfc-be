@@ -311,10 +311,10 @@ window.onload = function () {
             var toBeAppend = "<div class='col-4 mb-3'></div>";
             var appendDiv = $(toBeAppend).appendTo('#picGroup');
             var appendPic = $("<img class='h-100 w-100 m-0'>").appendTo(appendDiv);
-            $(appendPic).attr('src',window.house_prefix+imageUrl);
+            $(appendPic).attr('src',imageUrl);
 
 
-            $('#tempContainer').append($('<img>').attr('src',window.house_prefix+imageUrl));
+            $('#tempContainer').append($('<img>').attr('src',imageUrl));
 
 
             $('#tempContainer img').on("load",function(){
@@ -344,7 +344,7 @@ window.onload = function () {
 
     //在选择了图片以后，可以点击删除
     $("#picGroup").on("click","div",function(){
-        var delId = $('#picGroup').index(this);
+        var delId = $(this).index();
         lCropperInstance.splice(delId,1);
         $(this).remove();
 
@@ -530,31 +530,31 @@ $('#modifyItem').click(function () {
 
     var areaRange = null;
     if(lArea < 50){
-        areaRange = '0-50';
+        areaRange = '0-50m²';
     }
     else if(lArea < 70){
-        areaRange = '50-70';
+        areaRange = '50-70m²';
     }
     else if(lArea < 90){
-        areaRange = '70-90';
+        areaRange = '70-90m²';
     }
     else if(lArea < 110){
-        areaRange = '90-110';
+        areaRange = '90-110m²';
     }
     else if(lArea < 130){
-        areaRange = '110-130';
+        areaRange = '110-130m²';
     }
     else if(lArea < 150){
-        areaRange = '130-150';
+        areaRange = '130-150m²';
     }
     else if(lArea < 200){
-        areaRange = '150-200';
+        areaRange = '150-200m²';
     }
     else if(lArea < 300){
-        areaRange = '200-300';
+        areaRange = '200-300m²';
     }
     else{
-        areaRange = '300以上';
+        areaRange = '300m²以上';
     }
 
     upData.push({

@@ -380,31 +380,31 @@ $('#addItem').click(function () {
 
     var areaRange = null;
     if(lArea < 50){
-        areaRange = '0-50';
+        areaRange = '0-50m²';
     }
     else if(lArea < 70){
-        areaRange = '50-70';
+        areaRange = '50-70m²';
     }
     else if(lArea < 90){
-        areaRange = '70-90';
+        areaRange = '70-90m²';
     }
     else if(lArea < 110){
-        areaRange = '90-110';
+        areaRange = '90-110m²';
     }
     else if(lArea < 130){
-        areaRange = '110-130';
+        areaRange = '110-130m²';
     }
     else if(lArea < 150){
-        areaRange = '130-150';
+        areaRange = '130-150m²';
     }
     else if(lArea < 200){
-        areaRange = '150-200';
+        areaRange = '150-200m²';
     }
     else if(lArea < 300){
-        areaRange = '200-300';
+        areaRange = '200-300m²';
     }
     else{
-        areaRange = '300以上';
+        areaRange = '300m²以上';
     }
 
     upData.push({

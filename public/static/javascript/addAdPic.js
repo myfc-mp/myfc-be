@@ -178,10 +178,10 @@ window.onload = function () {
             var toBeAppend = "<div class='col-4 mb-3'></div>";
             var appendDiv = $(toBeAppend).appendTo('#picGroup');
             var appendPic = $("<img class='h-100 w-100 m-0'>").appendTo(appendDiv);
-            $(appendPic).attr('src',window.carousel_prefix+imageUrl);
+            $(appendPic).attr('src',imageUrl);
+            console.log(imageUrl);
 
-
-            $('#tempContainer').append($('<img>').attr('src',window.carousel_prefix+imageUrl));
+            $('#tempContainer').append($('<img>').attr('src',imageUrl));
 
 
             $('#tempContainer img').on("load",function(){
@@ -212,7 +212,7 @@ window.onload = function () {
 
     //在选择了图片以后，可以点击删除
     $("#picGroup").on("click","div",function(){
-        var delId = $('#picGroup').index(this);
+        var delId = $(this).index();
         lCropperInstance.splice(delId,1);
         $(this).remove();
 

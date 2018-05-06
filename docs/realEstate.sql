@@ -45,10 +45,9 @@ INSERT INTO `label` (`id`, `description`, `back_color`, `font_color`, `delete_ti
 (25, '低单价', 'RGB(231,247,253)', 'RGB(46,117,182)', NULL, NULL),
 (26, '低总价', 'RGB(244,232,248)', 'RGB(142,74,172)', NULL, NULL);
 
-
--------------------------------
-Table structure for label_house
--------------------------------
+-- -------------------------------
+-- Table structure for label_house
+-- -------------------------------
 DROP TABLE IF EXISTS `label_house`;
 CREATE TABLE `label_house` (
   `label_id` int(11) NOT NULL COMMENT '作为外键与标签信息关联',
@@ -66,7 +65,7 @@ DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
-  `url` varchar(50) NOT NULL COMMENT '房屋图片地址',
+  `url` varchar(100) NOT NULL COMMENT '房屋图片地址',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -79,7 +78,7 @@ CREATE TABLE `image` (
 DROP TABLE IF EXISTS `avatar`;
 CREATE TABLE `avatar` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(50) NOT NULL COMMENT '头像图片地址',
+  `url` varchar(100) NOT NULL COMMENT '头像图片地址',
   `agency_id` int(11) NOT NULL COMMENT '作为外键与经济人信息关联',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
@@ -180,7 +179,7 @@ CREATE TABLE `store` (
 DROP TABLE IF EXISTS `carousel`;
 CREATE TABLE `carousel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(50) NOT NULL COMMENT 'carousel图片地址',
+  `url` varchar(100) NOT NULL COMMENT 'carousel图片地址',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -193,7 +192,7 @@ DROP TABLE IF EXISTS `recommend`;
 CREATE TABLE `recommend` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `config` tinyint NOT NULL COMMENT '是否配置',
-  `label` varchar(50) NOT NULL COMMENT '封推标签图片地址',
+  `label` varchar(100) NOT NULL COMMENT '封推标签图片地址',
   `house_id` int(11) NOT NULL COMMENT '作为外键与房屋信息关联',
   `delete_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,

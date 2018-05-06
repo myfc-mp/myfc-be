@@ -15,6 +15,7 @@ use think\facade\Request;
 class RentItem extends BaseModel
 {
     protected $hidden = ['delete_time','update_time'];
+    protected $autoWriteTimeStamp = true;
     public function saveRent(){
         $model = static::create([
             'name'          =>  Request::param('name'),
@@ -76,5 +77,31 @@ class RentItem extends BaseModel
             'around'        =>  Request::param('around'),
         ],['id' => Request::param('id')]);
         return $model;
+    }
+
+    public function getSelectedRentFromDB(){
+        $_Map=[];
+        $location = Request::param('location');
+        if($location != '不限'){
+            $_Map['location']=$location;
+        }
+        $rental = Request::param('rental');
+        if($rental != '不限'){
+            $_Map['rental_range']=$rental;
+        }
+        $type = Request::param('type');
+        if($type != '不限'){
+            $_Map['type']=$type;
+        }
+        $area = Request::param('area');
+        if($area != '不限'){
+            $_Map['area_range']=$area;
+        }
+        $page = Request::param('pageIndex');
+        return static::where($_Map)
+            ->field('id,name,title,location,type,area,rental')
+            ->with(['image','labelName'])
+            ->order('update_time desc')
+            ->paginate(15,true,['page'=>$page]);
     }
 }

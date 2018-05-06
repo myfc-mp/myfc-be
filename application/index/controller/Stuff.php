@@ -53,7 +53,7 @@ class Stuff extends Controller
             //用保存数据库得到的id来给头像命名
             $image_name = $model->id.'.jpg';
             //这里定义头像文件的保存路径，一定要用相对路径,特别注意大小写
-            $image_file = "../public/static/personal/".$image_name;
+            $image_file = "static/personal/".$image_name;
             $result = base64_upload(Request::param('avatar'), $image_file);
             Avatar::saveAvatar($image_name,$model->id);
             if ($result) {
@@ -69,7 +69,7 @@ class Stuff extends Controller
     public function deleteInfo($id){
         $result = Agency::deleteAgencyFromDB();
         if($result){
-            $image_file = "../public/static/personal/".$id.".jpg";
+            $image_file = "static/personal/".$id.".jpg";
             unlink($image_file);
         }
         return ['status' => '200'];
@@ -90,7 +90,7 @@ class Stuff extends Controller
             //用保存数据库得到的id来给头像命名
             $image_name = Request::param('id').'.jpg';
             //这里定义头像文件的保存路径，一定要用相对路径,特别注意大小写
-            $image_file = "../public/static/personal/".$image_name;
+            $image_file = "static/personal/".$image_name;
             $result = base64_upload(Request::param('avatar'), $image_file);
 
             if ($result) {

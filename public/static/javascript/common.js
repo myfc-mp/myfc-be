@@ -1,15 +1,7 @@
 //图片完整路径前缀(服务器)
 // window.avatar_prefix = '/myfcBackEnd/public/static/personal/';
 //图片完整路径前缀(本地)
-window.avatar_prefix = '/static/personal/';
-//图片完整路径前缀(服务器)
-// window.house_prefix ='/myfcBackEnd/public/static/houseImage/';
-//图片完整路径前缀(本地)
-window.house_prefix ='/static/houseImage/';
-//图片完整路径前缀(服务器)
-// window.carousel_prefix= '/myfcBackEnd/public/static/carousel/';
-//图片完整路径前缀(本地)
-window.carousel_prefix  = '/static/carousel/';
+
 $(document).ready(function(){
     //页面跳转事件
     $("#addResold").click(function(){
