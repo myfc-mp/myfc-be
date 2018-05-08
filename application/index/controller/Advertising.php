@@ -43,7 +43,11 @@ class Advertising extends Controller
 
     public function saveCarousel(){
         $imageList = Request::param('image');
-        $imageList = explode(",",$imageList);
+        //data参数里面只有对象，没有数组，因此要构造出数组来
+        if($imageList){
+            $imageList = explode(",",$imageList);
+        }
+
         $result = Carousel::updateCarousel($imageList);
 
         if($result) {

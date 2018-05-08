@@ -17,13 +17,15 @@ class LabelHouse extends BaseModel
     protected $hidden = ['delete_time','update_time','house_id'];
     public function saveLabel($id){
         $labelList = Request::param('label');
-        $labelList = explode(",",$labelList);
-        $toSaveList = [];
-        foreach ($labelList as $item) {
-            array_push($toSaveList,['house_id' =>$id , 'label_id' => $item ]);
+        if($labelList){
+            $labelList = explode(",",$labelList);
+            $toSaveList = [];
+            foreach ($labelList as $item) {
+                array_push($toSaveList,['house_id' =>$id , 'label_id' => $item ]);
+            }
+            return static::saveAll($toSaveList);
         }
-
-        return static::saveAll($toSaveList);
+        return true;
     }
 
     public function deleteLabelFromDB($id){

@@ -322,7 +322,7 @@ window.onload = function () {
 
                 var picTobeAdd = getBase64Image(thisDOM[0]);
                 var imageList = picTobeAdd.split(',');
-                lCropperInstance.push(imageList[1]);
+                lCropperInstance[$(this).index()]=imageList[1];
 
                 if(lCropperInstance.length > 0){
                     $('#picErrInfo').removeClass('sr-only');
@@ -338,7 +338,7 @@ window.onload = function () {
     //在选择了图片以后，可以点击删除
     $("#picGroup").on("click","div",function(){
         var delId = $(this).index();
-        console.log(delId);
+
         lCropperInstance.splice(delId,1);
         $(this).remove();
 

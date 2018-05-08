@@ -30,7 +30,9 @@ class AddHouse extends Controller
         $houseModel = ResoldItem::saveResold();
         LabelHouse::saveLabel($houseModel->id);
         $imageList = Request::param('image');
-        $imageList = explode(",",$imageList);
+        if($imageList){
+            $imageList = explode(",",$imageList);
+        }
 
         $result = Image::saveImage($imageList,$houseModel->id);
         if($result) {
@@ -51,7 +53,9 @@ class AddHouse extends Controller
         $houseModel = RentItem::saveRent();
         LabelHouse::saveLabel($houseModel->id);
         $imageList = Request::param('image');
-        $imageList = explode(",",$imageList);
+        if($imageList){
+            $imageList = explode(",",$imageList);
+        }
 
         $result = Image::saveImage($imageList,$houseModel->id);
         if($result) {

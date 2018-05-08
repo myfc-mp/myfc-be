@@ -329,7 +329,7 @@ window.onload = function () {
 
                 var picTobeAdd = getBase64Image(thisDOM[0]);
                 var imageList = picTobeAdd.split(',');
-                lCropperInstance.push(imageList[1]);
+                lCropperInstance[$(this).index()]=imageList[1];
 
                 if(lCropperInstance.length > 0){
                     $('#picErrInfo').removeClass('sr-only');

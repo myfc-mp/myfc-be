@@ -15,7 +15,7 @@ Route::get('think', function () {
 // 不参数的post
 //Route::post('index/addHouse', 'api/GetSelectedHouse/getResoldHouse');
 // 要加参数的post
-//Route::post('index/addHouse/:no', 'index/ManageRecommend/fromResold');
+//Route::post('index/addHouse', 'index/Advertising/saveCarousel');
 // 不参数的get
 //Route::get('index/addHouse', 'api/ManageRecommend/getRecommendInfo');
 // 要加参数的get

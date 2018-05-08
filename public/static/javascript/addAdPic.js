@@ -179,10 +179,8 @@ window.onload = function () {
             var appendDiv = $(toBeAppend).appendTo('#picGroup');
             var appendPic = $("<img class='h-100 w-100 m-0'>").appendTo(appendDiv);
             $(appendPic).attr('src',imageUrl);
-            console.log(imageUrl);
 
             $('#tempContainer').append($('<img>').attr('src',imageUrl));
-
 
             $('#tempContainer img').on("load",function(){
                 var thisDOM = $(this);
@@ -193,15 +191,14 @@ window.onload = function () {
                 }
                 isHandlerExsit.push(src);
 
-
                 var picTobeAdd = getBase64Image(thisDOM[0]);
                 var imageList = picTobeAdd.split(',');
-                lCropperInstance.push(imageList[1]);
+                lCropperInstance[$(this).index()]=imageList[1];
 
                 if(lCropperInstance.length > 0){
                     $('#picErrInfo').removeClass('sr-only');
                 }
-                console.log(lCropperInstance.length);
+
                 if(lCropperInstance.length >= 9){
                     $('#inputLabel').removeClass('btn-info').addClass('btn-secondary');
                     $('#inputImage').attr('disabled','disabled');
@@ -214,9 +211,10 @@ window.onload = function () {
     $("#picGroup").on("click","div",function(){
         var delId = $(this).index();
         lCropperInstance.splice(delId,1);
+
         $(this).remove();
 
-        if(lCropperInstance.length == 0){
+        if(!lCropperInstance.length){
             $('#picErrInfo').addClass('sr-only');
         }
         if(lCropperInstance.length < 9){
@@ -249,7 +247,7 @@ $('#addItem').click(function () {
 
     $.ajax({
         url: "?s=/index/advertising/saveCarousel",
-        // url:"index/addtoHouse?XDEBUG_SESSION_START=15567",
+        // url:"index/addHouse?XDEBUG_SESSION_START=11570",
         type: 'post',
         data: upData,
         dataType: 'json',

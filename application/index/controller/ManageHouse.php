@@ -89,7 +89,9 @@ class ManageHouse extends Controller
     public function updateResoldInfo($id){
         $model = ResoldItem::renewResold();
         $imageList = Request::param('image');
-        $imageList = explode(",",$imageList);
+        if($imageList){
+            $imageList = explode(",",$imageList);
+        }
         Image::updateImage($imageList,$id);
         LabelHouse::deleteLabelFromDB($id);
         LabelHouse::saveLabel($id);
@@ -115,7 +117,9 @@ class ManageHouse extends Controller
     public function updateRentInfo($id){
         $model = RentItem::renewRent();
         $imageList = Request::param('image');
-        $imageList = explode(",",$imageList);
+        if($imageList){
+            $imageList = explode(",",$imageList);
+        }
         Image::updateImage($imageList,$id);
         LabelHouse::deleteLabelFromDB($id);
         LabelHouse::saveLabel($id);

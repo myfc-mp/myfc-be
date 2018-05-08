@@ -173,7 +173,7 @@ window.onload = function () {
     initInfo();
     //在选择了图片以后，可以点击删除
     $("#picGroup").on("click","div",function(){
-        var delId = $('#picGroup').index(this);
+        var delId = $(this).index();
         lCropperInstance.splice(delId,1);
         $(this).remove();
 
