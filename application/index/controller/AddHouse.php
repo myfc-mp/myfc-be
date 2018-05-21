@@ -15,6 +15,7 @@ use app\index\facade\Label;
 use app\index\facade\LabelHouse;
 use app\index\facade\RentItem;
 use app\index\facade\ResoldItem;
+use app\index\facade\Video;
 use think\Controller;
 use think\facade\Request;
 
@@ -33,8 +34,9 @@ class AddHouse extends Controller
         if($imageList){
             $imageList = explode(",",$imageList);
         }
-
         $result = Image::saveImage($imageList,$houseModel->id);
+
+        Video::saveVideo($houseModel->id);
         if($result) {
             return ['status'=>'200'];
         }
@@ -58,6 +60,9 @@ class AddHouse extends Controller
         }
 
         $result = Image::saveImage($imageList,$houseModel->id);
+
+        Video::saveVideo($houseModel->id);
+
         if($result) {
             return ['status'=>'200'];
         }

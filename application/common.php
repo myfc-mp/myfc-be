@@ -26,7 +26,7 @@ Facade::bind([
       index\facade\Store::class           => index\model\Store::class,
       index\facade\Carousel::class        => index\model\Carousel::class,
       index\facade\Recommend::class       => index\model\Recommend::class,
-//    api\facade\ProductProperty::class   => api\model\ProductProperty::class,
+      index\facade\Video::class           => index\model\Video::class,
 //    api\facade\Theme::class             => api\model\Theme::class,
 //    api\facade\User::class              => api\model\User::class,
 //    api\facade\UserAddress::class       => api\model\UserAddress::class,

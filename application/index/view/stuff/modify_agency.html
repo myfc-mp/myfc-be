@@ -18,8 +18,8 @@
         <td><img src="{$vo.avatar.url}"></td>
         <td>{$vo.name}</td>
         <td>
-            <button data-id="{$vo.id}" data-toggle="" class="btn btn-warning btn-sm modifyInfo">修改</button>
-            <button data-id="{$vo.id}" data-name="{$vo.name}" class="btn btn-danger btn-sm deleteInfo">删除</button>
+            <button data-id="{$vo.id}" data-toggle="" class="btn btn-warning btn-sm modifyInfo" disabled>修改</button>
+            <button data-id="{$vo.id}" data-name="{$vo.name}" class="btn btn-danger btn-sm deleteInfo" disabled>删除</button>
         </td>
     </tr>
     {/foreach}

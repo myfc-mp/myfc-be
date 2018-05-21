@@ -17,23 +17,11 @@ class Store extends BaseModel
     {
         $model = static::create([
             'name'          =>  Request::param('name'),
-            'phone'         =>  Request::param('phone'),
             'address'      =>  Request::param('address'),
             'lat'           =>  Request::param('lat'),
             'lng'           =>  Request::param('lng'),
         ]);
 
-        return $model;
-    }
-
-    public function renewStore(){
-        $model = static::save([
-            'name'          =>  Request::param('name'),
-            'phone'         =>  Request::param('phone'),
-            'address'      =>  Request::param('address'),
-            'lat'           =>  Request::param('lat'),
-            'lng'           =>  Request::param('lng'),
-        ],['id' => Request::param('id')]);
         return $model;
     }
 

@@ -45,16 +45,6 @@ class ManageStore extends Controller
         return ['status'=>'400'];
     }
 
-    public function updateStoreInfo(){
-        $result = Store::renewStore();
-
-        if($result) {
-            return ['status'=>'200'];
-        }
-
-        return ['status'=>'400'];
-    }
-
     public function deleteStoreInfo(){
         $result = Store::deleteStoreFromDB();
         if($result) {

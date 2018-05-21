@@ -18,4 +18,7 @@ return [
 
     //图片完整路径前缀
     'carousel_prefix'         => $root.'carousel/',
+
+    //视频完整路径前缀
+    'video_prefix'         => $root.'video/'
 ];

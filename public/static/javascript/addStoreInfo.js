@@ -1,5 +1,4 @@
 var nameInput = false;
-var phoneInput = false;
 var addressInput = false;
 var mapInput = false;
 var latlng = [30.6573435,104.0659188];//天府广场坐标
@@ -38,15 +37,6 @@ $('#storeName').blur(function () {
     }
 });
 
-$('#storePhone').blur(function () {
-    var   inputLength = $('#storePhone').val().length;
-    if(inputLength>0){
-        phoneInput = true;
-    }
-    else{
-        phoneInput = false;
-    }
-});
 
 $('#storeAddress').blur(function () {
     var   inputLength = $('#storeAddress').val().length;
@@ -59,7 +49,7 @@ $('#storeAddress').blur(function () {
 });
 
 $('#addItem').click(function () {
-    if (!(mapInput && phoneInput && addressInput && nameInput)) {
+    if (!(mapInput && addressInput && nameInput)) {
         $('#submitInfoErr').removeClass('sr-only');
         return;
     }

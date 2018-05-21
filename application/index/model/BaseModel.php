@@ -49,4 +49,8 @@ class BaseModel extends Model
         return $this->hasOne('Avatar','agency_id','id');
     }
 
+    public function video(){
+        return $this->hasOne('Video','house_id','id');
+    }
+
 }

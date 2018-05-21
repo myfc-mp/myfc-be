@@ -7,6 +7,7 @@ var haveAddPic = 0;
 var agencyList =[];
 var labelList=[];
 var latlng = [30.6573435,104.0659188];//天府广场坐标
+var formData = new FormData();
 
 window.onload = function () {
 
@@ -137,6 +138,7 @@ window.onload = function () {
 
     // 导入图像文件
     var inputImage = document.getElementById('inputImage');
+    var inputVideo = document.getElementById('inputVideo');
 
     if (URL) {
         inputImage.onchange = function () {
@@ -163,6 +165,22 @@ window.onload = function () {
                 }
             }
         };
+
+        inputVideo.onchange = function () {
+            var files = this.files;
+            var file;
+
+            if (cropper && files && files.length) {
+                file = files[0];
+
+                if (/^video\/\w+/.test(file.type)) {
+                    formData.append('video',file);
+                } else {
+                    window.alert('Please choose an video file.');
+                }
+            }
+        };
+
     } else {
         inputImage.disabled = true;
         inputImage.parentNode.className += ' disabled';
@@ -311,38 +329,23 @@ $('#addItem').click(function () {
     var upData = $('#soldForm1').serializeArray();
     upData=upData.concat($('#soldForm2').serializeArray()).concat($('#soldForm3').serializeArray());
 
-
+    for(var i in upData){
+        formData.append(upData[i].name,upData[i].value);
+    }
     var badges = $("#labelZone").children("span.badge-success");
     var badgeNo = [];
     badges.map(function ()  {
         badgeNo.push(parseInt(this.getAttribute('value')));
         return this;
     });
-    upData.push({
-        'name':'lat',
-        'value':latlng.lat
-    });
-    upData.push({
-        'name':'lng',
-        'value':latlng.lng
-    });
-    upData.push({
-        'name':'label',
-        'value':badgeNo
-    });
-    upData.push({
-        'name':'image',
-        'value':lCropperInstance
-    });
-    var lTotal,lArea;
-    for(var i in upData){
-        if(upData[i].name === 'rental'){
-            lTotal = upData[i].value;
-        }
-        if(upData[i].name === 'area'){
-            lArea = upData[i].value;
-        }
-    }
+
+    formData.append('lat',latlng.lat);
+    formData.append('lng',latlng.lng);
+    formData.append('label',badgeNo);
+    formData.append('image',lCropperInstance);
+
+    var lTotal = formData.get('rental');
+    var lArea = formData.get('area');
 
     var priceRange = null;
     if(lTotal < 500){
@@ -373,10 +376,6 @@ $('#addItem').click(function () {
         priceRange = '8000以上';
     }
 
-    upData.push({
-        'name':'rental_range',
-        'value':priceRange
-    });
 
     var areaRange = null;
     if(lArea < 50){
@@ -407,18 +406,17 @@ $('#addItem').click(function () {
         areaRange = '300m²以上';
     }
 
-    upData.push({
-        'name':'area_range',
-        'value':areaRange
-    });
-
+    formData.append('rental_range',priceRange);
+    formData.append('area_range',areaRange);
 
     $.ajax({
         url: "?s=/index/Add_house/saveRentInfo",
         // url:"index/addHouse?XDEBUG_SESSION_START=17815",
         type: 'post',
-        data: upData,
+        data: formData,
         dataType: 'json',
+        contentType:false,
+        processData:false,
         success: function (data) {
             window.location.href="?s=/index/Add_house/addRentResult/status/"+data.status;
             // console.log(data.status);
