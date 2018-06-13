@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //定义props的默认值
 const defaultProps = {
-    userId : 777
+    userId : 77887
 };
 
 export default class BodyChild extends React.Component {
